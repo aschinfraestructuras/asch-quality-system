@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styles/ViewChecklist.css';
 
 // Dados de exemplo de um checklist preenchido
