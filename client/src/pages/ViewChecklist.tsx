@@ -297,25 +297,26 @@ const ViewChecklist = () => {
                       )}
                       
                       {item.evidence && (
-                        <div className="item-evidence">
-                          <span className="details-label">Evidência:</span>
-                          <div className="evidence-thumbnail">
-                            <span className="thumbnail-placeholder">📷</span>
-                            <span className="evidence-filename">{item.evidence}</span>
-                          </div>
-                        </div>
-                       {/* Área de upload para novas evidências */}
-<div className="item-evidence-upload">
-  <span className="details-label">Adicionar Evidência:</span>
-  <EvidenceUploader 
-    onUpload={(fileData) =>{
-      console.log("Arquivo enviado:", fileData);
-      // Em um cenário real, aqui você salvaria a evidência
-      alert(`Evidência "${fileData.name}" adicionada com sucesso!`);
-    }} 
-  />
-</div>
-                      )}
+  <div className="item-evidence">
+    <span className="details-label">Evidência:</span>
+    <div className="evidence-thumbnail">
+      <span className="thumbnail-placeholder">📷</span>
+      <span className="evidence-filename">{item.evidence}</span>
+    </div>
+
+    {/* Área de upload para novas evidências */}
+    <div className="item-evidence-upload">
+      <span className="details-label">Adicionar Evidência:</span>
+      <EvidenceUploader 
+        onUpload={(fileData) => {
+          console.log("Arquivo enviado:", fileData);
+          // Em um cenário real, aqui você salvaria a evidência
+          alert(`Evidência "${fileData.name}" adicionada com sucesso!`);
+        }} 
+      />
+    </div>
+  </div>
+)}
                     </div>
                   )}
                 </div>
