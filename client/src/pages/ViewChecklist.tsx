@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../styles/ViewChecklist.css';
+import EvidenceUploader from '../components/EvidenceUploader';
 
 // Dados de exemplo de um checklist preenchido
 const checklistData = {
@@ -303,6 +304,17 @@ const ViewChecklist = () => {
                             <span className="evidence-filename">{item.evidence}</span>
                           </div>
                         </div>
+                       {/* Área de upload para novas evidências */}
+<div className="item-evidence-upload">
+  <span className="details-label">Adicionar Evidência:</span>
+  <EvidenceUploader 
+    onUpload={(fileData) =>{
+      console.log("Arquivo enviado:", fileData);
+      // Em um cenário real, aqui você salvaria a evidência
+      alert(`Evidência "${fileData.name}" adicionada com sucesso!`);
+    }} 
+  />
+</div>
                       )}
                     </div>
                   )}
