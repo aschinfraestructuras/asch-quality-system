@@ -5,7 +5,8 @@ import EnsaioRoutes from './components/EnsaioRoutes';
 import NaoConformidades from './pages/NaoConformidades';
 import Relatorios from './pages/Relatorios';
 import Navbar from './components/Navbar';
-import './App.css';
+import './styles/App.css';
+
 
 function App() {
   return (
