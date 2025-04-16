@@ -1,0 +1,444 @@
+/* Estilos para o componente de Análise Avançada de Ensaios */
+
+.ensaios-analysis {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    padding: 20px;
+  }
+  
+  .analysis-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+  }
+  
+  .analysis-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 24px;
+  }
+  
+  /* Opções de análise */
+  .analysis-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+  }
+  
+  .parameter-selection {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .analysis-filters {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+  }
+  
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .projects-filter {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .filter-checkbox {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  /* Tabs */
+  .analysis-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+  }
+  
+  .tab-btn {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #7f8c8d;
+    position: relative;
+    transition: color 0.3s;
+  }
+  
+  .tab-btn.active {
+    color: #3498db;
+  }
+  
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #3498db;
+  }
+  
+  .tab-btn:hover:not(.active) {
+    color: #2c3e50;
+  }
+  
+  /* Conteúdo da análise */
+  .analysis-content {
+    padding: 20px 0;
+  }
+  
+  /* Estado de carregamento */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 0;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .loading-container p {
+    color: #7f8c8d;
+    font-size: 16px;
+  }
+  
+  /* Estilo para os gráficos */
+  .analysis-chart {
+    margin-bottom: 30px;
+  }
+  
+  .chart-header {
+    margin-bottom: 20px;
+  }
+  
+  .chart-header h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 18px;
+  }
+  
+  .chart-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .info-item {
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  .info-item strong {
+    color: #2c3e50;
+  }
+  
+  .correlation-value {
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .correlation-value.strong {
+    background-color: #27ae60;
+    color: white;
+  }
+  
+  .correlation-value.moderate {
+    background-color: #f39c12;
+    color: white;
+  }
+  
+  .correlation-value.weak {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  /* Placeholder para gráficos (simula um gráfico real) */
+  .chart-placeholder {
+    height: 400px;
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .chart-content {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .chart-axis {
+    position: relative;
+  }
+  
+  .y-axis {
+    width: 60px;
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .x-axis {
+    height: 40px;
+    position: absolute;
+    left: 60px;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .axis-label {
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+  
+  .x-axis .axis-label {
+    transform: none;
+  }
+  
+  .chart-body {
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    right: 20px;
+    bottom: 60px;
+  }
+  
+  /* Gráfico de dispersão */
+  .scatter-plot {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: white;
+    border: 1px solid #eee;
+  }
+  
+  .data-point {
+    width: 8px;
+    height: 8px;
+    background-color: #3498db;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, 50%);
+  }
+  
+  .regression-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #e74c3c;
+    transform: rotate(-30deg);
+    top: 50%;
+    transform-origin: left center;
+  }
+  
+  /* Gráfico de linhas */
+  .line-chart {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: white;
+    border: 1px solid #eee;
+  }
+  
+  .data-line {
+    position: absolute;
+    width: calc(100% - 16px);
+    height: 2px;
+    background-color: #3498db;
+    top: 50%;
+    left: 8px;
+    transform: rotate(0deg);
+  }
+  
+  /* Gráfico de controle estatístico */
+  .control-chart {
+    height: 200px;
+  }
+  
+  .control-limits {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .ucl, .center-line, .lcl {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    left: 0;
+  }
+  
+  .ucl {
+    background-color: #e74c3c;
+  }
+  
+  .center-line {
+    background-color: #3498db;
+  }
+  
+  .lcl {
+    background-color: #e74c3c;
+  }
+  
+  .limit-label {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    background-color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    border: 1px solid #eee;
+  }
+  
+  /* Interpretação do gráfico */
+  .chart-interpretation {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    border-left: 4px solid #3498db;
+  }
+  
+  .chart-interpretation h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 16px;
+  }
+  
+  .chart-interpretation p {
+    margin: 0;
+    color: #34495e;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Cartões estatísticos */
+    .statistical-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .stat-card {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    border-top: 3px solid #3498db;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 5px;
+  }
+  
+  .stat-label {
+    color: #7f8c8d;
+    font-size: 13px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 992px) {
+    .analysis-options {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .parameter-selection, .analysis-filters {
+      min-width: 0;
+    }
+    
+    .statistical-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chart-info {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .analysis-tabs {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 5px;
+    }
+    
+    .chart-placeholder {
+      height: 300px;
+    }
+    
+    .statistical-grid {
+      grid-template-columns: 1fr;
+    }
+  }
