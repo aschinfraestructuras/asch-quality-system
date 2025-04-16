@@ -789,36 +789,7 @@ export default NewEnsaioPage;
       </div>
     );
   };
-    return (
-      <div className="step-container">
-        <h2>Passo 2: Informações Básicas</h2>
-        
-        <div className="form-group">
-          <label htmlFor="name">Nome do Ensaio</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Ex: Ensaio de Compressão - Pilar P1"
-            required
-          />
-        </div>
-        
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="type">Tipo de Ensaio</label>
-            <input
-              type="text"
-              id="type"
-              name="type"
-              value={formData.type}
-              readOnly
-              className="readonly-input"
-            />
-          </div>
-          
+     
           <div className="form-group">
             <label htmlFor="normReference">Norma de Referência</label>
             <input
