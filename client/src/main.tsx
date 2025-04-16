@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import './styles/index.css';
+// import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
+// Obter o elemento root e verificar se existe
+const rootElement = document.getElementById('root');
+
+// Verificar se o elemento existe antes de criar a raiz
+if (rootElement) {
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
       <App />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+    </React.StrictMode>
+  );
+} else {
+  console.error('Elemento com ID "root" não encontrado no DOM!');
+}
