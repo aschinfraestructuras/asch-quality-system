@@ -1,6 +1,10 @@
 import  { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Checklists.css';
+import { Routes, Route } from 'react-router-dom';
+import NewChecklist from './NewChecklist';
+import ViewChecklist from './ViewChecklist';
+
 
 // Dados de exemplo para checklists
 const checklistsData = [
@@ -110,12 +114,15 @@ const Checklists = () => {
 
   // Função para navegar para a página de novo checklist
   const handleNewChecklist = () => {
-    navigate('/checklists/novo');
+   navigate('/checklists/new');
+
   };
 
   // Função para navegar para a página de visualização de um checklist
   const handleViewChecklist = (id: number) => {
-    navigate(`/checklists/${id}`);
+     navigate(`/checklists/view/${id}`);
+
+ 
   };
 
   return (
@@ -187,7 +194,8 @@ const Checklists = () => {
             {filteredChecklists.map(checklist => (
               <tr key={checklist.id}>
                 <td className="checklist-name">
-                  <Link to={`/checklists/${checklist.id}`}>{checklist.name}</Link>
+                 <Link to={`/checklists/view/${checklist.id}`}>{checklist.name}</Link>
+
                 </td>
                 <td className="checklist-type">{checklist.type}</td>
                 <td className="checklist-project">{checklist.project}</td>
@@ -228,14 +236,25 @@ const Checklists = () => {
       {filteredChecklists.length === 0 && (
         <div className="no-results">
           <p>Nenhum checklist encontrado com os filtros atuais.</p>
-          <button className="btn-outline-primary" onClick={() => {
-            setSearchTerm('');
-            setTypeFilter('Todos os tipos');
-            setStatusFilter('Todos os status');
-            setProjectFilter('Todos os projetos');
-          }}>Limpar filtros</button>
+          <button
+            className="btn-outline-primary"
+            onClick={() => {
+              setSearchTerm('');
+              setTypeFilter('Todos os tipos');
+              setStatusFilter('Todos os status');
+              setProjectFilter('Todos os projetos');
+            }}
+          >
+            Limpar filtros
+          </button>
         </div>
       )}
+
+      {/* Rotas internas do módulo Checklists */}
+      <Routes>
+        <Route path="new" element={<NewChecklist />} />
+        <Route path="view/:id" element={<ViewChecklist />} />
+      </Routes>
     </div>
   );
 };
