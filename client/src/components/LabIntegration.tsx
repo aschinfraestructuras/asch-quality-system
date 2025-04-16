@@ -143,7 +143,8 @@ const connectionData: LabConnection[] = [
   }
 ];
 
-const importData: DataImport[] = [
+    const importData: DataImport[] = [
+
   {
     id: 'imp-001',
     equipmentId: 'eq-001',
@@ -350,7 +351,8 @@ const LabIntegration = () => {
   };
   
   // Importar dados
-  const importData = (equipmentId: string) => {
+   const handleImportData = (equipmentId: string) => { 
+
     setIsImporting(true);
     
     // Simulação de importação
@@ -481,7 +483,7 @@ const LabIntegration = () => {
                               className="import-btn"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                importData(eq.id);
+                                handleImportData(eq.id);
                               }}
                               disabled={isImporting}
                             >
@@ -705,7 +707,7 @@ const LabIntegration = () => {
                   {selectedEquipment && getEquipmentById(selectedEquipment)?.connected && (
                     <button 
                       className="import-btn"
-                      onClick={() => importData(selectedEquipment)}
+                      onClick={() => handleImportData(selectedEquipment)}
                       disabled={isImporting}
                     >
                       Importar Dados de {getEquipmentById(selectedEquipment)?.name}

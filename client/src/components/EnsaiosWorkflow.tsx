@@ -33,7 +33,7 @@ interface EnsaioWorkflow {
   stepHistory: {
     stepId: string;
     startDate: string;
-    endDate?: string;
+    endDate?: string | null;
     duration?: number;
     comments?: string;
     performedBy?: string;
