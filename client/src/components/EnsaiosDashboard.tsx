@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../styles/EnsaiosDashboard.css';
 
 // Tipos para os dados do dashboard
@@ -98,10 +98,11 @@ const monthlyStats: MonthlyStats[] = [
 ];
 
 const EnsaiosDashboard = () => {
-  const [stats, setStats] = useState<EnsaioStats>(statsData);
-  const [projects, setProjects] = useState<ProjectStats[]>(projectStats);
-  const [types, setTypes] = useState<TypeStats[]>(typeStats);
-  const [monthly, setMonthly] = useState<MonthlyStats[]>(monthlyStats);
+  const [stats] = useState<EnsaioStats>(statsData);
+  const [projects] = useState<ProjectStats[]>(projectStats);
+
+  const [types] = useState<TypeStats[]>(typeStats);
+  const [monthly] = useState<MonthlyStats[]>(monthlyStats);
   const [timeFrame, setTimeFrame] = useState<string>('year');
   const [loading, setLoading] = useState<boolean>(false);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import '../styles/EnsaiosWorkflow.css';
 
 // Tipos para o fluxo de trabalho
@@ -315,7 +315,7 @@ const activeWorkflows: EnsaioWorkflow[] = [
 ];
 
 const EnsaiosWorkflow = () => {
-  const [templates, setTemplates] = useState<WorkflowTemplate[]>(workflowTemplates);
+  const [templates] = useState<WorkflowTemplate[]>(workflowTemplates);
   const [workflows, setWorkflows] = useState<EnsaioWorkflow[]>(activeWorkflows);
   const [selectedWorkflow, setSelectedWorkflow] = useState<string | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
