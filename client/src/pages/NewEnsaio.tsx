@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/NewEnsaio.css';
 
@@ -166,7 +166,7 @@ const equipmentOptions: Record<string, string[]> = {
   ]
 };
 
-const NewEnsaioPage = () => {
+const NewEnsaioPage: React.FC = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -363,86 +363,147 @@ const NewEnsaioPage = () => {
     );
   };
 
-  return (
-    <div className="new-ensaio-container">
-      <div className="new-ensaio-header">
-        <h1>Novo Ensaio</h1>
-        <button 
-          type="button" 
-          className="cancel-btn"
-          onClick={() => navigate('/ensaios')}
-        >
-          Cancelar
-        </button>
-      </div>
-
-      <div className="progress-bar">
-        <div className={`progress-step ${currentStep >= 1 ? 'active' : ''}`}>
-          <div className="step-number">1</div>
-          <div className="step-label">Tipo de Ensaio</div>
+  // Renderizar passo 2: Informações básicas
+  const renderStep2 = () => {
+    return (
+      <div className="step-container">
+        <h2>Passo 2: Informações Básicas</h2>
+        
+        <div className="form-group">
+          <label htmlFor="name">Nome do Ensaio</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Ex: Ensaio de Compressão - Pilar P1"
+            required
+          />
         </div>
-        <div className="progress-line"></div>
-        <div className={`progress-step ${currentStep >= 2 ? 'active' : ''}`}>
-          <div className="step-number">2</div>
-          <div className="step-label">Informações Básicas</div>
-        </div>
-        <div className="progress-line"></div>
-        <div className={`progress-step ${currentStep >= 3 ? 'active' : ''}`}>
-          <div className="step-number">3</div>
-          <div className="step-label">Amostras</div>
-        </div>
-        <div className="progress-line"></div>
-        <div className={`progress-step ${currentStep >= 4 ? 'active' : ''}`}>
-          <div className="step-number">4</div>
-          <div className="step-label">Resultados</div>
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        {currentStep === 1 && renderStep1()}
-        {currentStep === 2 && renderStep2()}
-        {currentStep === 3 && renderStep3()}
-        {currentStep === 4 && renderStep4()}
-
-        <div className="form-navigation">
-          {currentStep > 1 && (
-            <button 
-              type="button" 
-              className="prev-btn"
-              onClick={prevStep}
-            >
-              Anterior
-            </button>
-          )}
+        
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="type">Tipo de Ensaio</label>
+            <input
+              type="text"
+              id="type"
+              name="type"
+              value={formData.type}
+              readOnly
+              className="readonly-input"
+            />
+          </div>
           
-          {currentStep < 4 ? (
-            <button 
-              type="button" 
-              className="next-btn"
-              onClick={nextStep}
-              disabled={
-                (currentStep === 1 && !formData.type) ||
-                (currentStep === 2 && (!formData.name || !formData.project || !formData.material || !formData.testDate || !formData.technician))
-              }
-            >
-              Próximo
-            </button>
-          ) : (
-            <button 
-              type="submit" 
-              className="submit-btn"
-              disabled={formData.results.some(result => !result.value)}
-            >
-              Guardar Ensaio
-            </button>
-          )}
+          <div className="form-group">
+            <label htmlFor="normReference">Norma de Referência</label>
+            <input
+              type="text"
+              id="normReference"
+              name="normReference"
+              value={formData.normReference}
+              onChange={handleInputChange}
+              placeholder="Ex: NBR 5739"
+              required
+            />
+          </div>
         </div>
-      </form>
-    </div>
-  );
-};
-
-export default NewEnsaioPage;
+        
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="project">Projeto</label>
+            <select
+              id="project"
+              name="project"
+              value={formData.project}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Selecione um projeto</option>
+              {projectOptions.map(project => (
+                <option key={project} value={project}>{project}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="material">Material</label>
+            <select
+              id="material"
+              name="material"
+              value={formData.material}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Selecione um material</option>
+              {materialOptions.map(material => (
+                <option key={material} value={material}>{material}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="testDate">Data do Ensaio</label>
+            <input
+              type="date"
+              id="testDate"
+              name="testDate"
+              value={formData.testDate}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="technician">Técnico Responsável</label>
+            <input
+              type="text"
+              id="technician"
+              name="technician"
+              value={formData.technician}
+              onChange={handleInputChange}
+              placeholder="Nome do técnico responsável"
+              required
+            />
+          </div>
+        </div>
+        
+        <div className="form-group">
+          <label htmlFor="description">Descrição</label>
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+            placeholder="Descrição detalhada do ensaio e seu propósito"
+            rows={4}
+          />
+        </div>
+        
+        <div className="form-group">
+          <label>Equipamentos Utilizados</label>
+          <div className="equipment-options">
+            {selectedCategory && equipmentOptions[selectedCategory] ? 
+              equipmentOptions[selectedCategory].map(equipment => (
+                <div key={equipment} className="equipment-option">
+                  <input
+                    type="checkbox"
+                    id={`equipment-${equipment}`}
+                    checked={formData.equipment.includes(equipment)}
+                    onChange={() => handleEquipmentChange(equipment)}
+                  />
+                  <label htmlFor={`equipment-${equipment}`}>{equipment}</label>
+                </div>
+              )) : 
+              <p>Selecione um tipo de ensaio para ver equipamentos disponíveis.</p>
+            }
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   // Renderizar passo 3: Amostras
   const renderStep3 = () => {
@@ -648,145 +709,84 @@ export default NewEnsaioPage;
     );
   };
 
-// Renderizar passo 2: Informações básicas
-const renderStep2 = () => {
+  // Renderização do componente principal
   return (
-    <div className="step-container">
-      <h2>Passo 2: Informações Básicas</h2>
-
-      <div className="form-group">
-        <label htmlFor="name">Nome do Ensaio</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          placeholder="Ex: Ensaio de Compressão - Pilar P1"
-          required
-        />
+    <div className="new-ensaio-container">
+      <div className="new-ensaio-header">
+        <h1>Novo Ensaio</h1>
+        <button 
+          type="button" 
+          className="cancel-btn"
+          onClick={() => navigate('/ensaios')}
+        >
+          Cancelar
+        </button>
       </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="type">Tipo de Ensaio</label>
-          <input
-            type="text"
-            id="type"
-            name="type"
-            value={formData.type}
-            readOnly
-            className="readonly-input"
-          />
+      <div className="progress-bar">
+        <div className={`progress-step ${currentStep >= 1 ? 'active' : ''}`}>
+          <div className="step-number">1</div>
+          <div className="step-label">Tipo de Ensaio</div>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="normReference">Norma de Referência</label>
-          <input
-            type="text"
-            id="normReference"
-            name="normReference"
-            value={formData.normReference}
-            onChange={handleInputChange}
-            placeholder="Ex: NBR 5739"
-            required
-          />
+        <div className="progress-line"></div>
+        <div className={`progress-step ${currentStep >= 2 ? 'active' : ''}`}>
+          <div className="step-number">2</div>
+          <div className="step-label">Informações Básicas</div>
+        </div>
+        <div className="progress-line"></div>
+        <div className={`progress-step ${currentStep >= 3 ? 'active' : ''}`}>
+          <div className="step-number">3</div>
+          <div className="step-label">Amostras</div>
+        </div>
+        <div className="progress-line"></div>
+        <div className={`progress-step ${currentStep >= 4 ? 'active' : ''}`}>
+          <div className="step-number">4</div>
+          <div className="step-label">Resultados</div>
         </div>
       </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="project">Projeto</label>
-          <select
-            id="project"
-            name="project"
-            value={formData.project}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Selecione um projeto</option>
-            {projectOptions.map(project => (
-              <option key={project} value={project}>{project}</option>
-            ))}
-          </select>
-        </div>
+      <form onSubmit={handleSubmit}>
+        {currentStep === 1 && renderStep1()}
+        {currentStep === 2 && renderStep2()}
+        {currentStep === 3 && renderStep3()}
+        {currentStep === 4 && renderStep4()}
 
-        <div className="form-group">
-          <label htmlFor="material">Material</label>
-          <select
-            id="material"
-            name="material"
-            value={formData.material}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="">Selecione um material</option>
-            {materialOptions.map(material => (
-              <option key={material} value={material}>{material}</option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="testDate">Data do Ensaio</label>
-          <input
-            type="date"
-            id="testDate"
-            name="testDate"
-            value={formData.testDate}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="technician">Técnico Responsável</label>
-          <input
-            type="text"
-            id="technician"
-            name="technician"
-            value={formData.technician}
-            onChange={handleInputChange}
-            placeholder="Nome do técnico responsável"
-            required
-          />
-        </div>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="description">Descrição</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          placeholder="Descrição detalhada do ensaio e seu propósito"
-          rows={4}
-        />
-      </div>
-
-      <div className="form-group">
-        <label>Equipamentos Utilizados</label>
-        <div className="equipment-options">
-          {selectedCategory && equipmentOptions[selectedCategory] ? (
-            equipmentOptions[selectedCategory].map(equipment => (
-              <div key={equipment} className="equipment-option">
-                <input
-                  type="checkbox"
-                  id={`equipment-${equipment}`}
-                  checked={formData.equipment.includes(equipment)}
-                  onChange={() => handleEquipmentChange(equipment)}
-                />
-                <label htmlFor={`equipment-${equipment}`}>{equipment}</label>
-              </div>
-            ))
+        <div className="form-navigation">
+          {currentStep > 1 && (
+            <button 
+              type="button" 
+              className="prev-btn"
+              onClick={prevStep}
+            >
+              Anterior
+            </button>
+          )}
+          
+          {currentStep < 4 ? (
+            <button 
+              type="button" 
+              className="next-btn"
+              onClick={nextStep}
+              disabled={
+                (currentStep === 1 && !formData.type) ||
+                (currentStep === 2 && (!formData.name || !formData.project || !formData.material || !formData.testDate || !formData.technician))
+              }
+            >
+              Próximo
+            </button>
           ) : (
-            <p>Selecione um tipo de ensaio para ver equipamentos disponíveis.</p>
+            <button 
+              type="submit" 
+              className="submit-btn"
+              disabled={formData.results.some(result => !result.value)}
+            >
+              Guardar Ensaio
+            </button>
           )}
         </div>
-      </div>
+      </form>
     </div>
   );
 };
+
+export default NewEnsaioPage;
