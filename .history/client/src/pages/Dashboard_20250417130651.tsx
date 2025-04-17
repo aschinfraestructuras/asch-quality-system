@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Dashboard.css';
+import api from '../services/api';
 
 // Interfaces para tipagem
 interface ResumoDados {
@@ -39,117 +40,6 @@ interface Acao {
   responsavel: string;
 }
 
-// API simulada para desenvolvimento
-const apiSimulada = {
-  get: async (url: string): Promise<any> => {
-    // Simulando dados da API
-    if (url.includes('/dashboard/resumo')) {
-      return { 
-        data: {
-          projetos: 7,
-          checklists: 42,
-          ensaios: 18,
-          naoConformidades: 5,
-          documentos: 124,
-          acoesPendentes: 8
-        }
-      };
-    } else if (url.includes('/projetos/ativos')) {
-      return {
-        data: [
-          { 
-            id: 1, 
-            nome: 'Obra Ferroviária Setúbal', 
-            progresso: 75, 
-            status: 'Em andamento',
-            ultimaAtualizacao: '16/04/2025'
-          },
-          { 
-            id: 2, 
-            nome: 'Ponte Vasco da Gama - Manutenção', 
-            progresso: 30, 
-            status: 'Planeado',
-            ultimaAtualizacao: '15/04/2025'
-          },
-          { 
-            id: 3, 
-            nome: 'Ampliação Terminal Portuário', 
-            progresso: 45, 
-            status: 'Em andamento',
-            ultimaAtualizacao: '14/04/2025'
-          }
-        ]
-      };
-    } else if (url.includes('/atividades/recentes')) {
-      return {
-        data: [
-          { 
-            id: 1, 
-            origem: 'ensaios',
-            descricao: 'Ensaio de Compressão - Concreto', 
-            data: '2025-04-16', 
-            usuario: 'João Silva',
-            projeto: 'Obra Ferroviária Setúbal',
-            estado: 'Conforme'
-          },
-          { 
-            id: 2, 
-            origem: 'naoConformidades',
-            descricao: 'Desvio na espessura do betão', 
-            data: '2025-04-15', 
-            usuario: 'Ana Costa',
-            projeto: 'Obra Ferroviária Setúbal',
-            estado: 'Aberta'
-          },
-          { 
-            id: 3, 
-            origem: 'checklists',
-            descricao: 'Inspeção de Execução - Fundações', 
-            data: '2025-04-15', 
-            responsavel: 'Ricardo Pereira',
-            projeto: 'Ampliação Terminal Portuário',
-            estado: 'Completo'
-          }
-        ]
-      };
-    } else if (url.includes('/acoes/pendentes')) {
-      return {
-        data: [
-          {
-            id: 1,
-            descricao: 'Aprovar relatório de ensaios',
-            tipo: 'ensaio',
-            prioridade: 'Alta',
-            prazo: '20/04/2025',
-            responsavel: 'João Silva'
-          },
-          {
-            id: 2,
-            descricao: 'Revisar plano de qualidade',
-            tipo: 'documento',
-            prioridade: 'Média',
-            prazo: '25/04/2025',
-            responsavel: 'Ana Costa'
-          },
-          {
-            id: 3,
-            descricao: 'Corrigir não conformidade #125',
-            tipo: 'naoConformidade',
-            prioridade: 'Alta',
-            prazo: '18/04/2025',
-            responsavel: 'Ricardo Pereira'
-          }
-        ]
-      };
-    }
-    return { data: [] };
-  },
-  post: async (url: string): Promise<any> => {
-    // Simulando resposta de sucesso para todas as requisições POST
-    return { success: true };
-  }
-};
-
 const Dashboard: React.FC = () => {
   const [periodoFiltro, setPeriodoFiltro] = useState<string>('semana');
   const [resumoDados, setResumoDados] = useState<ResumoDados>({
@@ -173,20 +63,19 @@ const Dashboard: React.FC = () => {
       
       try {
         // Carregar dados de resumo
-        const resumoResponse = await apiSimulada.get(`/dashboard/resumo?periodo=${periodoFiltro}`);
+        const resumoResponse = await api.get(`/dashboard/resumo?periodo=${periodoFiltro}`);
         setResumoDados(resumoResponse.data);
         
         // Carregar projetos ativos
-        const projetosResponse = await apiSimulada.get('/projetos/ativos');
+        const projetosResponse = await api.get('/projetos/ativos');
         setProjetosAtivos(projetosResponse.data);
         
         // Carregar atividades recentes
-        const atividadesResponse = await apiSimulada.get(`/atividades/recentes?periodo=${periodoFiltro}`);
-        const atividadesFormatadas = formatarAtividades(atividadesResponse.data);
-        setAtividadesRecentes(atividadesFormatadas);
+        const atividadesResponse = await api.get(`/atividades/recentes?periodo=${periodoFiltro}`);
+        setAtividadesRecentes(formatarAtividades(atividadesResponse.data));
         
         // Carregar ações pendentes
-        const acoesResponse = await apiSimulada.get('/acoes/pendentes');
+        const acoesResponse = await api.get('/acoes/pendentes');
         setAcoesPendentes(acoesResponse.data);
       } catch (error) {
         console.error("Erro ao carregar dados do dashboard:", error);
@@ -211,40 +100,34 @@ const Dashboard: React.FC = () => {
       return {
         id: atividade.id,
         tipo: tipo,
-        descricao: atividade.descricao || atividade.titulo || '',
+        descricao: atividade.descricao || atividade.titulo,
         data: formatarData(atividade.data),
-        usuario: atividade.usuario || atividade.responsavel || '',
-        projeto: atividade.projeto || '',
-        resultado: atividade.resultado || atividade.estado || ''
+        usuario: atividade.usuario || atividade.responsavel,
+        projeto: atividade.projeto,
+        resultado: atividade.resultado || atividade.estado
       };
     });
   };
   
   // Função para formatar datas
   const formatarData = (data: string): string => {
-    if (!data) return '';
-    try {
-      const dataObj = new Date(data);
-      return dataObj.toLocaleDateString('pt-PT');
-    } catch (e) {
-      return data; // Retorna o formato original se houver erro na conversão
-    }
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-PT');
   };
   
   // Função para marcar ação como concluída
   const concluirAcao = async (id: number) => {
     try {
-      await apiSimulada.post(`/acoes/${id}/concluir`);
+      await api.post(`/acoes/${id}/concluir`);
       
       // Atualizar lista de ações pendentes
-      const novasAcoes = acoesPendentes.filter(acao => acao.id !== id);
-      setAcoesPendentes(novasAcoes);
+      setAcoesPendentes(prevAcoes => prevAcoes.filter(acao => acao.id !== id));
       
       // Atualizar contagem no resumo
-      setResumoDados({
-        ...resumoDados,
-        acoesPendentes: resumoDados.acoesPendentes - 1
-      });
+      setResumoDados(prevResumo => ({
+        ...prevResumo,
+        acoesPendentes: prevResumo.acoesPendentes - 1
+      }));
     } catch (error) {
       console.error("Erro ao concluir ação:", error);
       alert("Não foi possível concluir a ação. Por favor, tente novamente.");
@@ -257,10 +140,10 @@ const Dashboard: React.FC = () => {
       const offset = atividadesRecentes.length;
       const limite = 5;
       
-      const response = await apiSimulada.get(`/atividades/recentes?periodo=${periodoFiltro}&offset=${offset}&limite=${limite}`);
+      const response = await api.get(`/atividades/recentes?periodo=${periodoFiltro}&offset=${offset}&limite=${limite}`);
       const novasAtividades = formatarAtividades(response.data);
       
-      setAtividadesRecentes([...atividadesRecentes, ...novasAtividades]);
+      setAtividadesRecentes(prevAtividades => [...prevAtividades, ...novasAtividades]);
     } catch (error) {
       console.error("Erro ao carregar mais atividades:", error);
       alert("Não foi possível carregar mais atividades. Por favor, tente novamente.");

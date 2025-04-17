@@ -1,0 +1,69 @@
+.dashboard-v2-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  .dashboard-v2-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-v2-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .card-v2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-basis: 16%;
+  }
+  
+  .card-v2 .icon-v2 {
+    font-size: 30px;
+    color: #3498db;
+  }
+  
+  .card-v2 .info-v2 {
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .card-v2 .valor {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card-v2 .label {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .dashboard-v2-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card-v2 {
+      margin-bottom: 20px;
+      width: 90%;
+    }
+  }
+  
+  /* Estilos para o gráfico */
+  .grafico-container {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

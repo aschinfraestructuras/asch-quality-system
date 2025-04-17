@@ -1,47 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Dashboard.css';
-
-// Interfaces para tipagem
-interface ResumoDados {
-  projetos: number;
-  checklists: number;
-  ensaios: number;
-  naoConformidades: number;
-  documentos: number;
-  acoesPendentes: number;
-}
-
-interface Projeto {
-  id: number;
-  nome: string;
-  progresso: number;
-  status: string;
-  ultimaAtualizacao: string;
-}
-
-interface Atividade {
-  id: number;
-  tipo: string;
-  descricao: string;
-  data: string;
-  usuario: string;
-  projeto: string;
-  resultado: string;
-}
-
-interface Acao {
-  id: number;
-  descricao: string;
-  tipo: string;
-  prioridade: string;
-  prazo: string;
-  responsavel: string;
-}
-
-// API simulada para desenvolvimento
-const apiSimulada = {
-  get: async (url: string): Promise<any> => {
+// Se você não tiver um módulo de API configurado, pode criar um simples:
+// Crie o arquivo em src/services/api.ts com o conteúdo abaixo
+// Para uso imediato, vamos usar dados simulados
+const api = {
+  get: async (url: string) => {
     // Simulando dados da API
     if (url.includes('/dashboard/resumo')) {
       return { 
@@ -144,11 +108,48 @@ const apiSimulada = {
     }
     return { data: [] };
   },
-  post: async (url: string): Promise<any> => {
+  post: async (url: string) => {
     // Simulando resposta de sucesso para todas as requisições POST
     return { success: true };
   }
 };
+
+// Interfaces para tipagem
+interface ResumoDados {
+  projetos: number;
+  checklists: number;
+  ensaios: number;
+  naoConformidades: number;
+  documentos: number;
+  acoesPendentes: number;
+}
+
+interface Projeto {
+  id: number;
+  nome: string;
+  progresso: number;
+  status: string;
+  ultimaAtualizacao: string;
+}
+
+interface Atividade {
+  id: number;
+  tipo: string;
+  descricao: string;
+  data: string;
+  usuario: string;
+  projeto: string;
+  resultado: string;
+}
+
+interface Acao {
+  id: number;
+  descricao: string;
+  tipo: string;
+  prioridade: string;
+  prazo: string;
+  responsavel: string;
+}
 
 const Dashboard: React.FC = () => {
   const [periodoFiltro, setPeriodoFiltro] = useState<string>('semana');
@@ -173,20 +174,19 @@ const Dashboard: React.FC = () => {
       
       try {
         // Carregar dados de resumo
-        const resumoResponse = await apiSimulada.get(`/dashboard/resumo?periodo=${periodoFiltro}`);
+        const resumoResponse = await api.get(`/dashboard/resumo?periodo=${periodoFiltro}`);
         setResumoDados(resumoResponse.data);
         
         // Carregar projetos ativos
-        const projetosResponse = await apiSimulada.get('/projetos/ativos');
+        const projetosResponse = await api.get('/projetos/ativos');
         setProjetosAtivos(projetosResponse.data);
         
         // Carregar atividades recentes
-        const atividadesResponse = await apiSimulada.get(`/atividades/recentes?periodo=${periodoFiltro}`);
-        const atividadesFormatadas = formatarAtividades(atividadesResponse.data);
-        setAtividadesRecentes(atividadesFormatadas);
+        const atividadesResponse = await api.get(`/atividades/recentes?periodo=${periodoFiltro}`);
+        setAtividadesRecentes(formatarAtividades(atividadesResponse.data));
         
         // Carregar ações pendentes
-        const acoesResponse = await apiSimulada.get('/acoes/pendentes');
+        const acoesResponse = await api.get('/acoes/pendentes');
         setAcoesPendentes(acoesResponse.data);
       } catch (error) {
         console.error("Erro ao carregar dados do dashboard:", error);
@@ -211,40 +211,34 @@ const Dashboard: React.FC = () => {
       return {
         id: atividade.id,
         tipo: tipo,
-        descricao: atividade.descricao || atividade.titulo || '',
+        descricao: atividade.descricao || atividade.titulo,
         data: formatarData(atividade.data),
-        usuario: atividade.usuario || atividade.responsavel || '',
-        projeto: atividade.projeto || '',
-        resultado: atividade.resultado || atividade.estado || ''
+        usuario: atividade.usuario || atividade.responsavel,
+        projeto: atividade.projeto,
+        resultado: atividade.resultado || atividade.estado
       };
     });
   };
   
   // Função para formatar datas
   const formatarData = (data: string): string => {
-    if (!data) return '';
-    try {
-      const dataObj = new Date(data);
-      return dataObj.toLocaleDateString('pt-PT');
-    } catch (e) {
-      return data; // Retorna o formato original se houver erro na conversão
-    }
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString('pt-PT');
   };
   
   // Função para marcar ação como concluída
   const concluirAcao = async (id: number) => {
     try {
-      await apiSimulada.post(`/acoes/${id}/concluir`);
+      await api.post(`/acoes/${id}/concluir`);
       
       // Atualizar lista de ações pendentes
-      const novasAcoes = acoesPendentes.filter(acao => acao.id !== id);
-      setAcoesPendentes(novasAcoes);
+      setAcoesPendentes(prevAcoes => prevAcoes.filter(acao => acao.id !== id));
       
       // Atualizar contagem no resumo
-      setResumoDados({
-        ...resumoDados,
-        acoesPendentes: resumoDados.acoesPendentes - 1
-      });
+      setResumoDados(prevResumo => ({
+        ...prevResumo,
+        acoesPendentes: prevResumo.acoesPendentes - 1
+      }));
     } catch (error) {
       console.error("Erro ao concluir ação:", error);
       alert("Não foi possível concluir a ação. Por favor, tente novamente.");
@@ -257,10 +251,10 @@ const Dashboard: React.FC = () => {
       const offset = atividadesRecentes.length;
       const limite = 5;
       
-      const response = await apiSimulada.get(`/atividades/recentes?periodo=${periodoFiltro}&offset=${offset}&limite=${limite}`);
+      const response = await api.get(`/atividades/recentes?periodo=${periodoFiltro}&offset=${offset}&limite=${limite}`);
       const novasAtividades = formatarAtividades(response.data);
       
-      setAtividadesRecentes([...atividadesRecentes, ...novasAtividades]);
+      setAtividadesRecentes(prevAtividades => [...prevAtividades, ...novasAtividades]);
     } catch (error) {
       console.error("Erro ao carregar mais atividades:", error);
       alert("Não foi possível carregar mais atividades. Por favor, tente novamente.");
