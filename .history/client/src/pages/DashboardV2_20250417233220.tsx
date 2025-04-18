@@ -48,13 +48,6 @@ interface Obra {
 
 // API simulada para desenvolvimento
 const apiSimulada = {
-  obterObras: () => [
-    { id: 1, nome: 'Obra Ferroviária Setúbal' },
-    { id: 2, nome: 'Ponte Vasco da Gama - Manutenção' },
-    { id: 3, nome: 'Ampliação Terminal Portuário' },
-    { id: 4, nome: 'Reabilitação Urbana Baixa' }
-  ],
-  
   obterResumo: (obraId?: number) => {
     const resumo = {
       projetos: 7,
@@ -230,25 +223,15 @@ const DashboardV2: React.FC = () => {
   useEffect(() => {
     const carregarObras = async () => {
       try {
-        // Tentar obter dados do Supabase
         const { data, error } = await supabase
           .from('obras')
           .select('*')
           .order('ultima_atualizacao', { ascending: false });
           
         if (error) {
-          console.error('Erro ao carregar obras do Supabase:', error.message);
-          // Fallback para dados simulados
-          console.log('Utilizando dados simulados como fallback');
-          setObras(apiSimulada.obterObras());
+          console.error('Erro ao carregar obras:', error.message);
         } else {
-          // Usar dados do Supabase se estiverem disponíveis
-          if (data && data.length > 0) {
-            setObras(data);
-          } else {
-            console.log('Nenhum dado encontrado no Supabase, utilizando dados simulados como fallback');
-            setObras(apiSimulada.obterObras());
-          }
+          setObras(data || []);
         }
         
         // Verificar localStorage
@@ -258,9 +241,6 @@ const DashboardV2: React.FC = () => {
         }
       } catch (error) {
         console.error("Erro ao carregar obras:", error);
-        // Fallback para dados simulados em caso de exceção
-        console.log('Exceção ao tentar aceder ao Supabase, utilizando dados simulados como fallback');
-        setObras(apiSimulada.obterObras());
       }
     };
     

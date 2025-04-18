@@ -1,11 +1,10 @@
 
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import DashboardV2 from './pages/DashboardV2';
+import DashboardV2 from './pages/DashboardV2';  // Certifique-se que este caminho está correto
 import Checklists from './pages/Checklists';
 import EnsaioRoutes from './components/EnsaioRoutes';
 import NaoConformidadesRoutes from './components/NaoConformidadesRoutes';
-import DocumentosRoutes from './components/DocumentosRoutes'; // Nova importação
 import Relatorios from './pages/Relatorios';
 import Navbar from './components/Navbar';
 import './styles/App.css';
@@ -24,11 +23,10 @@ const App: React.FC = () => {
           <Routes>
             {/* Redireciona "/" para "/dashboard" */}
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<DashboardV2 />} />
+            <Route path="/dashboard" element={<DashboardV2 />} /> {/* Atualizado para DashboardV2 */}
             <Route path="/checklists/*" element={<Checklists />} />
             <Route path="/ensaios/*" element={<EnsaioRoutes />} />
             <Route path="/nao-conformidades/*" element={<NaoConformidadesRoutes />} />
-            <Route path="/documentos/*" element={<DocumentosRoutes />} /> {/* Nova rota */}
             <Route path="/relatorios/*" element={<Relatorios />} />
 
             {/* Página não encontrada */}
