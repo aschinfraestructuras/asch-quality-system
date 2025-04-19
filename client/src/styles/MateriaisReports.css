@@ -1,0 +1,191 @@
+/* MateriaisReports.css */
+
+.materiais-reports-container {
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .reports-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .reports-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .reports-header p {
+    color: #666;
+  }
+  
+  .reports-content {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .reports-sidebar {
+    width: 250px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  
+  .report-types-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .report-type-item {
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .report-type-item:hover {
+    background: #f0f0f0;
+  }
+  
+  .report-type-item.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .report-type-item i {
+    min-width: 20px;
+  }
+  
+  .report-format {
+    margin-top: 1.5rem;
+  }
+  
+  .format-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .format-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .format-option input {
+    margin-right: 0.4rem;
+  }
+  
+  .format-option.active {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .report-configuration {
+    flex: 1;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .report-info h3 {
+    margin-top: 0;
+  }
+  
+  .filter-section {
+    margin-top: 1.5rem;
+  }
+  
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .filter-group label {
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  
+  .filter-select {
+    padding: 0.4rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .filter-help {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .report-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+  
+  .reports-thumbnails {
+    margin-top: 3rem;
+  }
+  
+  .thumbnails-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .report-thumbnail {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 280px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  }
+  
+  .thumbnail-preview {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .thumbnail-info h4 {
+    margin: 0.2rem 0;
+  }
+  
+  .thumbnail-actions {
+    margin-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  

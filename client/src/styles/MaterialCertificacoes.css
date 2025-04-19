@@ -1,0 +1,259 @@
+.material-certificacoes-container {
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .certificacoes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .certificacoes-title h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #2a2a2a;
+  }
+  
+  .certificacoes-title p {
+    margin: 0.2rem 0 0;
+    font-size: 0.95rem;
+    color: #777;
+  }
+  
+  .certificacoes-actions button {
+    margin-left: 1rem;
+  }
+  
+  .certificacoes-summary {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-card {
+    flex: 1;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .summary-card.warning {
+    background-color: #fff7e0;
+  }
+  
+  .summary-card.danger {
+    background-color: #ffeaea;
+  }
+  
+  .summary-card.info {
+    background-color: #e7f3ff;
+  }
+  
+  .summary-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .summary-label {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .certificacoes-filter-section {
+    margin-bottom: 2rem;
+  }
+  
+  .filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  @media (min-width: 768px) {
+    .filter-row {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    padding: 0.5rem;
+    width: 220px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+  }
+  
+  .search-bar button {
+    padding: 0.5rem;
+    background-color: #0066cc;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  .filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter-select {
+    padding: 0.4rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 160px;
+  }
+  
+  .certificacoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .certificacao-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .certificacao-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+  }
+  
+  .certificacao-subtitle {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .status-badge {
+    margin-left: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 12px;
+    color: white;
+    background-color: #999;
+  }
+  
+  .status-active {
+    background-color: #28a745;
+  }
+  
+  .status-warning {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .status-danger {
+    background-color: #dc3545;
+  }
+  
+  .status-info {
+    background-color: #17a2b8;
+  }
+  
+  .certificacao-body {
+    margin-top: 1rem;
+  }
+  
+  .certificacao-detail {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .certificacao-detail.full-width {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .detail-value {
+    color: #333;
+  }
+  
+  .expiring-soon {
+    color: #d48806;
+    font-weight: bold;
+  }
+  
+  .expired {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  .certificacao-footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+  
+  .btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .btn-icon:hover {
+    color: #000;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 720px;
+    width: 100%;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  

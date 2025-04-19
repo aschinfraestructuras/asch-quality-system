@@ -1,11 +1,11 @@
-
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import DashboardV2 from './pages/DashboardV2';
 import Checklists from './pages/Checklists';
 import EnsaioRoutes from './components/EnsaioRoutes';
 import NaoConformidadesRoutes from './components/NaoConformidadesRoutes';
-import DocumentosRoutes from './components/DocumentosRoutes'; // Nova importação
+import DocumentosRoutes from './components/DocumentosRoutes';
+import MateriaisRoutes from './components/MateriaisRoutes'; // Rota dos Materiais
 import Relatorios from './pages/Relatorios';
 import Navbar from './components/Navbar';
 import './styles/App.css';
@@ -28,7 +28,8 @@ const App: React.FC = () => {
             <Route path="/checklists/*" element={<Checklists />} />
             <Route path="/ensaios/*" element={<EnsaioRoutes />} />
             <Route path="/nao-conformidades/*" element={<NaoConformidadesRoutes />} />
-            <Route path="/documentos/*" element={<DocumentosRoutes />} /> {/* Nova rota */}
+            <Route path="/documentos/*" element={<DocumentosRoutes />} />
+            <Route path="/materiais/*" element={<MateriaisRoutes />} /> {/* Materiais */}
             <Route path="/relatorios/*" element={<Relatorios />} />
 
             {/* Página não encontrada */}

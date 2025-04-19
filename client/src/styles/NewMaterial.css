@@ -1,0 +1,185 @@
+.new-material-container {
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .material-header h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .material-header p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+  }
+  
+  .tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .tab {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: bold;
+  }
+  
+  .tab.active {
+    border-color: #3498db;
+    color: #3498db;
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  .tab-content.active {
+    display: block;
+  }
+  
+  .form-grid {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .form-column {
+    flex: 1;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .required {
+    color: red;
+  }
+  
+  .foto-upload {
+    position: relative;
+    border: 1px dashed #ccc;
+    padding: 1rem;
+    text-align: center;
+    background-color: #fff;
+  }
+  
+  .foto-placeholder input[type='file'] {
+    display: none;
+  }
+  
+  .foto-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .btn-remove-foto {
+    background: transparent;
+    border: none;
+    color: red;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  
+  .form-help-text {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+  
+  .normas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .norma-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-add-norma {
+    align-self: flex-start;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .btn-remove-norma,
+  .btn-remove-foto {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .spinner-small {
+    width: 16px;
+    height: 16px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
