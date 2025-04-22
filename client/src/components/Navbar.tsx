@@ -83,18 +83,56 @@ const Navbar: React.FC = () => {
             </span>
           </Link>
         </div>
+        
+{/* MENU PRINCIPAL */}
+<ul className="navbar-menu">
+  <li>
+    <Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}>
+      <i className="fas fa-tachometer-alt"></i> Dashboard
+    </Link>
+  </li>
+  <li>
+    <Link to="/checklists" className={isActive('/checklists') ? 'active' : ''}>
+      <i className="fas fa-tasks"></i> Checklists
+    </Link>
+  </li>
+  <li>
+    <Link to="/ensaios" className={isActive('/ensaios') ? 'active' : ''}>
+      <i className="fas fa-flask"></i> Ensaios
+    </Link>
+  </li>
+  <li>
+    <Link to="/nao-conformidades" className={isActive('/nao-conformidades') ? 'active' : ''}>
+      <i className="fas fa-exclamation-triangle"></i> Não Conformidades
+    </Link>
+  </li>
+  <li>
+    <Link to="/documentos" className={isActive('/documentos') ? 'active' : ''}>
+      <i className="fas fa-file-alt"></i> Documentos
+    </Link>
+  </li>
+  <li>
+    <Link to="/materiais" className={isActive('/materiais') ? 'active' : ''}>
+      <i className="fas fa-boxes"></i> Materiais
+    </Link>
+  </li>
+  <li>
+    <Link to="/fornecedores" className={isActive('/fornecedores') ? 'active' : ''}>
+      <i className="fas fa-industry"></i> Fornecedores
+    </Link>
+  </li>
+  <li>
+    <Link to="/relatorios" className={isActive('/relatorios') ? 'active' : ''}>
+      <i className="fas fa-chart-pie"></i> Relatórios
+    </Link>
+  </li>
+  <li>
+    <Link to="/dashboard/analytics" className={isActive('/dashboard/analytics') ? 'active' : ''}>
+      <i className="fas fa-chart-line"></i> Analytics
+    </Link>
+  </li>
+</ul>
 
-        {/* MENU PRINCIPAL */}
-        <ul className="navbar-menu">
-          <li><Link to="/dashboard" className={isActive('/dashboard') ? 'active' : ''}><i className="fas fa-tachometer-alt"></i> Dashboard</Link></li>
-          <li><Link to="/checklists" className={isActive('/checklists') ? 'active' : ''}><i className="fas fa-tasks"></i> Checklists</Link></li>
-          <li><Link to="/ensaios" className={isActive('/ensaios') ? 'active' : ''}><i className="fas fa-flask"></i> Ensaios</Link></li>
-          <li><Link to="/nao-conformidades" className={isActive('/nao-conformidades') ? 'active' : ''}><i className="fas fa-exclamation-triangle"></i> Não Conformidades</Link></li>
-          <li><Link to="/documentos" className={isActive('/documentos') ? 'active' : ''}><i className="fas fa-file-alt"></i> Documentos</Link></li>
-          <li><Link to="/materiais" className={isActive('/materiais') ? 'active' : ''}><i className="fas fa-boxes"></i> Materiais</Link></li>
-          <li><Link to="/fornecedores" className={isActive('/fornecedores') ? 'active' : ''}><i className="fas fa-industry"></i> Fornecedores</Link></li>
-          <li><Link to="/relatorios" className={isActive('/relatorios') ? 'active' : ''}><i className="fas fa-chart-pie"></i> Relatórios</Link></li>
-        </ul>
 
         {/* UTILIZADOR */}
         <div className="navbar-user" style={{ position: 'relative' }}>

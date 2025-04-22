@@ -2,26 +2,38 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-// Configuração das variáveis de ambiente
+import analyticsRoutes from './routes/analytics.js';
+import usersRoutes from './routes/users.js';
+
 dotenv.config();
 
-// Inicialização da aplicação Express
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 5000;
 
-// Middleware
-app.use(cors());
+// ✅ CORS BEM CONFIGURADO
+app.use(cors({
+  origin: 'http://localhost:3002',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
-// Rota básica
-app.get('/', (req, res) => {
-  res.send('API do Sistema de Gestão de Qualidade ASCH está funcionando!');
+// ✅ TESTE RÁPIDO
+app.get('/', (_req, res) => {
+  console.log('🌐 Rota / chamada');
+  res.send('🎯 API do Sistema de Qualidade está online!');
 });
 
-// Rotas da API
-app.use('/api/users', require('./routes/users'));
+// ✅ LOG DE DEBUG NAS ROTAS
+app.use('/api/analytics', (req, res, next) => {
+  console.log(`📈 [${new Date().toISOString()}] Chamada à rota /api/analytics`);
+  next();
+}, analyticsRoutes);
 
-// Iniciar o servidor
+app.use('/api/users', usersRoutes);
+
+// ✅ BOOT DO SERVIDOR
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`🚀 Servidor a correr na porta ${PORT}`);
 });

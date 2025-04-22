@@ -682,7 +682,16 @@ const DashboardPro: React.FC = () => {
 
   return (
     <div className="dashboard-pro">
-   
+      {modoOffline && (
+        <div className="dashboard-offline-banner">
+          <i className="fas fa-exclamation-triangle"></i>
+          Modo offline ativo: A utilizar dados locais. Algumas funcionalidades podem estar limitadas.
+          <button onClick={() => setModoOffline(false)} className="tentar-novamente">
+            <i className="fas fa-sync-alt"></i> Tentar novamente
+          </button>
+        </div>
+      )}
+      
       {erroCarregamento && (
         <div className="dashboard-erro-banner">
           <i className="fas fa-exclamation-circle"></i>
@@ -880,7 +889,20 @@ const DashboardPro: React.FC = () => {
           </div>
         </div>
       </div>
-    
+      
+{/* Gráfico de Ensaios */}
+<div className="bg-white rounded-xl p-6 shadow-md mt-6 col-span-1 md:col-span-2">
+  <h2 className="text-xl font-semibold mb-4 text-center">Distribuição de Ensaios</h2>
+  <ResponsiveContainer width="100%" height={300}>
+    <BarChart data={dadosEnsaios}>
+      <XAxis dataKey="nome" />
+      <YAxis />
+      <Tooltip />
+      <Bar dataKey="valor" fill="#4f46e5" />
+    </BarChart>
+  </ResponsiveContainer>
+</div>
+
 
       {/* Conteúdo principal - varia conforme a visão ativa */}
       <div className="dashboard-conteudo-principal">

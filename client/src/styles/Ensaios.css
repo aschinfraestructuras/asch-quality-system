@@ -1,11 +1,12 @@
 /* Estilos para a página de Ensaios */
 
 .ensaios-container {
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
+  padding: 20px;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
   .ensaios-header {
     display: flex;
     justify-content: space-between;

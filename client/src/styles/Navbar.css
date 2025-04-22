@@ -1,118 +1,198 @@
-/* 🌟 Navbar Premium v10.0 – Parte 1/3 – Estrutura & cores principais */
+/* 🌟 Navbar Ultra Premium v6.0 – Azul ASCH Moderno + Detalhes Premium */
 
 .main-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Azul premium degradê */
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
   padding: 0 2rem;
-  height: 72px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  height: 80px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 1000;
-  font-family: 'Segoe UI', 'Inter', sans-serif;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
   transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo-img {
+  height: 42px;
+  object-fit: contain;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e0e7ff;
 }
 
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 0.6rem;
+  gap: 1rem;
   align-items: center;
   margin: 0;
   padding: 0;
 }
 
-.navbar-menu a,
-.navbar-menu span {
+.navbar-menu a {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
-  color: #e0e7ff;
+  gap: 0.5rem;
+  padding: 0.6rem 1.3rem;
+  border-radius: 12px;
+  color: #f8fafc;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  position: relative;
-  background-color: transparent;
+  font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 }
 
-.navbar-menu a:hover,
-.navbar-menu span:hover {
-  background-color: rgba(255, 255, 255, 0.06);
+.navbar-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
-.navbar-menu a.active,
-.navbar-menu span.active {
-  background-color: #3b82f6;
+.navbar-menu a.active {
+  background-color: rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.5);
-}
-/* 🌟 Navbar Premium v10.0 – Parte 2/3 – Submenus & ícones */
-
-.navbar-menu a svg,
-.navbar-menu span svg {
-  transition: transform 0.2s ease, color 0.2s ease;
-  color: #bfdbfe;
-  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6);
 }
 
-.navbar-menu a:hover svg,
-.navbar-menu span:hover svg {
-  transform: scale(1.2);
-  color: #ffffff;
-}
-
-.submenu {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  background: linear-gradient(135deg, #f9fafb, #f1f5f9);
-  color: #1e293b;
-  border-radius: 10px;
-  margin-top: 0.25rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-  min-width: 240px;
-  animation: fadeIn 0.25s ease-out;
-  padding: 0.4rem 0;
-  z-index: 9999;
-  border: 1px solid #e2e8f0;
-}
-
-.submenu::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 2rem;
-  width: 12px;
-  height: 12px;
-  background: inherit;
-  transform: rotate(45deg);
-  box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
-  z-index: -1;
-}
-
-.submenu a {
-  padding: 0.9rem 1.4rem;
-  font-size: 0.95rem;
-  color: #1e293b;
-  transition: all 0.2s ease;
+.navbar-user {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  border-left: 4px solid transparent;
+  gap: 1rem;
+  position: relative;
 }
 
-.submenu a:hover {
-  background-color: #eff6ff;
-  color: #1d4ed8;
-  border-left: 4px solid #60a5fa;
+.notification-btn {
+  background: none;
+  border: none;
+  color: #e0e7ff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.notification-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.08);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border-radius: 9999px;
+  border: 2px solid #1e3a8a;
+  font-weight: bold;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.8rem;
+  background: white;
+  color: #1e293b;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px #d1d5db;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.user-profile:hover {
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
+  transition: all 0.2s ease;
+}
+
+.user-profile:hover .user-avatar {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.35);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  color: #1f2937;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.user-name {
+  font-weight: 600;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 72px;
+  right: 0;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+  min-width: 220px;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  border: 1px solid #e5e7eb;
+  animation: fadeIn 0.3s ease;
+}
+
+.profile-dropdown a,
+.profile-dropdown div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.2rem;
+  color: #1f2937;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown div:hover {
+  background: #f1f5f9;
+  color: #1e3a8a;
 }
 
 @keyframes fadeIn {
@@ -125,125 +205,21 @@
     transform: translateY(0);
   }
 }
-/* 🌒 Dark Mode e Responsividade */
-@media (prefers-color-scheme: dark) {
-  .main-navbar {
-    background: linear-gradient(90deg, #0f172a, #1e293b);
+
+@media (max-width: 1024px) {
+  .navbar-menu {
+    display: none;
   }
-
-  .submenu {
-    background-color: #0f172a;
-    color: #f1f5f9;
-    border: 1px solid #1e293b;
+  .navbar-menu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #1e3a8a;
+    padding: 1.5rem 2rem;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
-
-  .submenu a:hover {
-    background-color: #1e293b;
-    color: #60a5fa;
-    border-left: 4px solid #3b82f6;
-  }
-
-  .navbar-menu a:hover,
-  .navbar-menu span:hover {
-    background-color: rgba(255, 255, 255, 0.06);
-  }
-
-  .search-trigger:hover,
-  .notification-btn:hover,
-  .user-profile:hover {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
-}
-
-/* 🧠 Acessibilidade */
-.navbar-menu a:focus-visible,
-.submenu a:focus-visible {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-}
-
-/* 🔍 Pesquisa e Notificações */
-.search-trigger,
-.notification-btn {
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 8px;
-  color: #e5e7eb;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.search-trigger:hover,
-.notification-btn:hover {
-  background-color: #1e293b;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.notification-badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #ef4444;
-  color: white;
-  font-size: 0.7rem;
-  min-width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4px;
-  border-radius: 9999px;
-  border: 2px solid #1e3a8a;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
-  font-weight: 600;
-}
-
-/* 👤 User Profile */
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.user-profile:hover {
-  background-color: #1e293b;
-}
-
-.user-avatar {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.25);
-  transition: all 0.2s ease;
-}
-
-.user-profile:hover .user-avatar {
-  transform: scale(1.05);
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.4);
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.85rem;
-  color: #e5e7eb;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.user-name {
-  font-weight: 600;
-}
-
-.user-email {
-  font-size: 0.75rem;
-  color: #cbd5e1;
 }

@@ -1,0 +1,34 @@
+{
+  "name": "asch-quality-system",
+  "version": "1.0.0",
+  "description": "Sistema completo de gestão documental e controlo de qualidade para obras civis, inspirado no Procore, Fieldwire e Softexpert, adaptado ao contexto português com funcionalidades inovadoras.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "build": "npm run build --prefix client && npm run build --prefix server",
+    "start": "npm run start --prefix server",
+    "test": "echo \"Erro: sem testes definidos\" && exit 1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aschinfraestructuras/asch-quality-system.git"
+  },
+  "keywords": [
+    "qualidade",
+    "obras",
+    "asch",
+    "SGQ",
+    "gestão"
+  ],
+  "author": "ASCH Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aschinfraestructuras/asch-quality-system/issues"
+  },
+  "homepage": "https://github.com/aschinfraestructuras/asch-quality-system#readme"
+}

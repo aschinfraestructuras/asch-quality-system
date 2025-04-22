@@ -6,6 +6,7 @@ import Relatorios from './pages/Relatorios';
 import Ensaios from './pages/Ensaios';
 import ViewEnsaio from './pages/ViewEnsaio';
 import NewEnsaio from './pages/NewEnsaio';
+import AnalyticsDashboard from './pages/AnalyticsDashboard'; // ← NOVO
 
 const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ const AppRoutes = () => {
       {/* Rotas principais */}
       <Route path="/" element={<Dashboard />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/analytics" element={<AnalyticsDashboard />} /> {/* NOVA ROTA */}
 
       {/* Rota aninhada principal para Checklists */}
       <Route path="/checklists/*" element={<Checklists />} />
@@ -33,4 +35,3 @@ const AppRoutes = () => {
 };
 
 export default AppRoutes;
-
