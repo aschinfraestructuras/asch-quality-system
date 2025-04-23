@@ -6,27 +6,90 @@ import Relatorios from './pages/Relatorios';
 import Ensaios from './pages/Ensaios';
 import ViewEnsaio from './pages/ViewEnsaio';
 import NewEnsaio from './pages/NewEnsaio';
-import AnalyticsDashboard from './pages/AnalyticsDashboard'; // ← NOVO
+import AnalyticsDashboard from './pages/AnalyticsDashboard';
+import Login from './pages/Login';
+
+import RequireAuth from './utils/RequireAuth'; // 👈 Importar o wrapper
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Rotas principais */}
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard/analytics" element={<AnalyticsDashboard />} /> {/* NOVA ROTA */}
+      {/* Rotas públicas */}
+      <Route path="/login" element={<Login />} />
 
-      {/* Rota aninhada principal para Checklists */}
-      <Route path="/checklists/*" element={<Checklists />} />
-
-      {/* Rotas para Ensaios */}
-      <Route path="/ensaios" element={<Ensaios />} />
-      <Route path="/ensaios/view/:id" element={<ViewEnsaio />} />
-      <Route path="/ensaios/new" element={<NewEnsaio />} />
-
-      {/* Outras rotas */}
-      <Route path="/nao-conformidades" element={<NaoConformidades />} />
-      <Route path="/relatorios" element={<Relatorios />} />
+      {/* Rotas protegidas */}
+      <Route
+        path="/"
+        element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/dashboard/analytics"
+        element={
+          <RequireAuth>
+            <AnalyticsDashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/checklists/*"
+        element={
+          <RequireAuth>
+            <Checklists />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/ensaios"
+        element={
+          <RequireAuth>
+            <Ensaios />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/ensaios/view/:id"
+        element={
+          <RequireAuth>
+            <ViewEnsaio />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/ensaios/new"
+        element={
+          <RequireAuth>
+            <NewEnsaio />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/nao-conformidades"
+        element={
+          <RequireAuth>
+            <NaoConformidades />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/relatorios"
+        element={
+          <RequireAuth>
+            <Relatorios />
+          </RequireAuth>
+        }
+      />
 
       {/* Fallback */}
       <Route path="*" element={<h1>Página não encontrada</h1>} />
