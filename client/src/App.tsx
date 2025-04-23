@@ -1,12 +1,15 @@
 console.log("🚀 Deploy automático funcionando!");
 
 import React from 'react';
+import { AppProvider } from './contexts/AppContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import './i18n'; // Configuração i18n
+import { LanguageSelector } from './components/common/LanguageSelector';
 
 // Páginas principais
 import DashboardPro from './pages/DashboardPro';
-import AnalyticsDashboard from './pages/AnalyticsDashboard'; // ← NOVO
-import DashboardLayout from './pages/DashboardLayout';       // ← NOVO
+import AnalyticsDashboard from './pages/AnalyticsDashboard';
+import DashboardLayout from './pages/DashboardLayout';
 import Checklists from './pages/Checklists';
 import Relatorios from './pages/Relatorios';
 
@@ -20,24 +23,25 @@ import FornecedorRoutes from './components/FornecedorRoutes';
 // Componentes globais
 import Navbar from './components/Navbar';
 
-// Estilos globais
+// Estilos
 import './styles/App.css';
 import './styles/DashboardPro.css';
+import './styles/components.css';
 
-// FontAwesome: configuração de ícones
+// FontAwesome config
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faBuilding, faFile, faFlask, faExclamationTriangle, faClipboardCheck,
-  faBox, faSync, faCalendarAlt, faUser, faFilter, faHistory, faClock, faEye,
-  faPlus, faTasks, faCheckCircle, faChartBar, faChartLine, faChartPie,
-  faChartArea, faTable, faSort, faSortUp, faSortDown, faFileExport,
-  faSearch, faBell, faCog, faList, faCheck, faTachometerAlt, faHome,
-  faExclamationCircle, faBoxes, faArrowUp, faArrowDown, faMinus, faTimes,
-  faCubes, faWarehouse, faCalendarDay, faCertificate, faIdCard, faStar,
-  faStarHalf, faEllipsisV, faPencilAlt, faFileContract, faInfoCircle,
-  faShoppingCart, faStickyNote, faFilePdf, faEnvelope, faPhone 
+  faBox, faSync, faCalendarAlt, faUser, faFilter, faHistory, faClock,
+  faEye, faPlus, faTasks, faCheckCircle, faChartBar, faChartLine,
+  faChartPie, faChartArea, faTable, faSort, faSortUp, faSortDown,
+  faFileExport, faSearch, faBell, faCog, faList, faCheck, faTachometerAlt,
+  faHome, faExclamationCircle, faBoxes, faArrowUp, faArrowDown, faMinus,
+  faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate, faIdCard,
+  faStar, faStarHalf, faEllipsisV, faPencilAlt, faFileContract,
+  faInfoCircle, faShoppingCart, faStickyNote, faFilePdf, faEnvelope, faPhone
 } from '@fortawesome/free-solid-svg-icons';
-import { 
+import {
   faCalendarAlt as farCalendarAlt,
   faStar as farStar
 } from '@fortawesome/free-regular-svg-icons';
@@ -50,52 +54,56 @@ library.add(
   faFileExport, faSearch, faBell, faCog, faList, faCheck, faTachometerAlt,
   faHome, faExclamationCircle, faBoxes, faArrowUp, faArrowDown,
   faMinus, faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate,
-  faIdCard, faStar, farStar, faStarHalf, faEllipsisV, faPencilAlt, 
-  faFileContract, faInfoCircle, faShoppingCart, faStickyNote, 
+  faIdCard, faStar, farStar, faStarHalf, faEllipsisV, faPencilAlt,
+  faFileContract, faInfoCircle, faShoppingCart, faStickyNote,
   faFilePdf, faEnvelope, faPhone
 );
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <div className="app-container">
-        {/* 🔝 Barra de navegação */}
-        <header className="header-fixed">
-          <Navbar />
-        </header>
+    <AppProvider>
+      <BrowserRouter>
+        <div className="app-container">
 
-        {/* 🧭 Conteúdo principal com sistema de rotas */}
-        <main className="content-container">
-          <Routes>
-            {/* Redirecionamento inicial */}
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          {/* 🔝 Barra de navegação fixa */}
+          <header className="header-fixed">
+            <Navbar />
+            <div className="header-tools">
+              <LanguageSelector />
+            </div>
+          </header>
 
-            {/* ✅ Rota estruturada do dashboard (usa layout com Sidebar) */}
-            <Route path="/dashboard/*" element={<DashboardLayout />}>
-              <Route index element={<DashboardPro />} />
-              <Route path="analytics" element={<AnalyticsDashboard />} />
-            </Route>
+          {/* 🧭 Conteúdo principal */}
+          <main className="content-container">
+            <Routes>
+              <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-            {/* Resto das rotas permanece igual */}
-            <Route path="/checklists/*" element={<Checklists />} />
-            <Route path="/ensaios/*" element={<EnsaioRoutes />} />
-            <Route path="/nao-conformidades/*" element={<NaoConformidadesRoutes />} />
-            <Route path="/documentos/*" element={<DocumentosRoutes />} />
-            <Route path="/materiais/*" element={<MateriaisRoutes />} />
-            <Route path="/fornecedores/*" element={<FornecedorRoutes />} />
-            <Route path="/relatorios/*" element={<Relatorios />} />
+              <Route path="/dashboard/*" element={<DashboardLayout />}>
+                <Route index element={<DashboardPro />} />
+                <Route path="analytics" element={<AnalyticsDashboard />} />
+              </Route>
 
-            {/* Página não encontrada */}
-            <Route path="*" element={<h1 style={{ padding: '2rem' }}>Página não encontrada</h1>} />
-          </Routes>
-        </main>
+              <Route path="/checklists/*" element={<Checklists />} />
+              <Route path="/ensaios/*" element={<EnsaioRoutes />} />
+              <Route path="/nao-conformidades/*" element={<NaoConformidadesRoutes />} />
+              <Route path="/documentos/*" element={<DocumentosRoutes />} />
+              <Route path="/materiais/*" element={<MateriaisRoutes />} />
+              <Route path="/fornecedores/*" element={<FornecedorRoutes />} />
+              <Route path="/relatorios/*" element={<Relatorios />} />
 
-        {/* 📌 Rodapé */}
-        <footer className="app-footer">
-          <p>© 2025 ASCH – Sistema de Gestão da Qualidade</p>
-        </footer>
-      </div>
-    </BrowserRouter>
+              {/* Página não encontrada */}
+              <Route path="*" element={<h1 style={{ padding: '2rem' }}>Página não encontrada</h1>} />
+            </Routes>
+          </main>
+
+          {/* 📌 Rodapé */}
+          <footer className="app-footer">
+            <p>© 2025 ASCH – Sistema de Gestão da Qualidade</p>
+          </footer>
+
+        </div>
+      </BrowserRouter>
+    </AppProvider>
   );
 };
 
