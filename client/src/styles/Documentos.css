@@ -674,3 +674,556 @@
           width: 100%;
         }
       }
+
+      /* Estilos específicos para o módulo de Procedimentos */
+
+/* ===== Estilos para a Lista de Procedimentos ===== */
+.procedimentos-container {
+  padding: 1.5rem;
+}
+
+.codigo-badge {
+  background-color: #e8f4fd;
+  color: #3498db;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.codigo-badge.small {
+  font-size: 0.75rem;
+  padding: 3px 6px;
+}
+
+.categoria-badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #f0f4f8;
+  color: #4a5568;
+}
+
+.categoria-badge.Qualidade {
+  background-color: #e8f7ed;
+  color: #27ae60;
+}
+
+.categoria-badge.Segurança {
+  background-color: #fef5e7;
+  color: #f39c12;
+}
+
+.categoria-badge.Ambiente {
+  background-color: #e6f7ef;
+  color: #3498db;
+}
+
+.categoria-badge.Produção {
+  background-color: #f8eafb;
+  color: #8e44ad;
+}
+
+.versao-badge {
+  background-color: #f0f4f8;
+  color: #4a5568;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.departamento-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #4a5568;
+  font-size: 0.875rem;
+}
+
+.autor-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  margin-top: 4px;
+  color: #718096;
+}
+
+/* Estados dos procedimentos */
+.status-ativo {
+  background-color: #e6f7ef;
+  color: #27ae60;
+}
+
+.status-em-revisao {
+  background-color: #e8f4fd;
+  color: #3498db;
+}
+
+.status-em-aprovacao {
+  background-color: #fef5e7;
+  color: #f39c12;
+}
+
+.status-obsoleto {
+  background-color: #edf2f7;
+  color: #a0aec0;
+}
+
+/* ===== Estilos para Visualização de Procedimento ===== */
+.procedimento-view-container {
+  padding: 1.5rem;
+}
+
+.procedimento-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.procedimento-header-info {
+  flex: 1;
+}
+
+.caminho-navegacao {
+  margin-bottom: 1rem;
+}
+
+.link-navegacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.link-navegacao:hover {
+  color: #3498db;
+}
+
+.procedimento-titulo {
+  margin-bottom: 1rem;
+}
+
+.titulo-principal {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.titulo-principal h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.procedimento-titulo h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #2d3748;
+}
+
+.procedimento-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.meta-icon {
+  color: #3498db;
+  margin-top: 2px;
+}
+
+.meta-texto {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.meta-valor {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.procedimento-header-acoes {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+/* Navegação do procedimento */
+.procedimento-navegacao {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.procedimento-navegacao .nav-item {
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4a5568;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.procedimento-navegacao .nav-item:hover {
+  color: #3498db;
+}
+
+.procedimento-navegacao .nav-item.ativo {
+  color: #3498db;
+  border-bottom-color: #3498db;
+  font-weight: 600;
+}
+
+/* Cards do conteúdo do procedimento */
+.procedimento-conteudo {
+  margin-bottom: 2rem;
+}
+
+.secao-sumario, 
+.secao-procedimento,
+.secao-responsabilidades,
+.secao-registos,
+.secao-historico {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-procedimento {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.card-procedimento.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-titulo {
+  background-color: #f8fafc;
+  padding: 1rem 1.25rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-conteudo {
+  padding: 1.25rem;
+}
+
+/* Listas e conteúdo específico */
+.lista-referencias {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.lista-referencias li {
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+.lista-definicoes {
+  margin: 0;
+}
+
+.lista-definicoes dt {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.lista-definicoes dd {
+  margin-left: 0;
+  margin-bottom: 1rem;
+  color: #4a5568;
+}
+
+.paragrafo-procedimento {
+  margin-bottom: 1.5rem;
+}
+
+.paragrafo-procedimento:last-child {
+  margin-bottom: 0;
+}
+
+.paragrafo-procedimento p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.6;
+}
+
+/* Responsabilidades */
+.responsabilidade-item {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.responsabilidade-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cargo-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 0.75rem 0;
+}
+
+.lista-responsabilidades {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.lista-responsabilidades li {
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+}
+
+/* Tabela de registos */
+.tabela-registos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-registos th {
+  text-align: left;
+  padding: 0.75rem;
+  background-color: #f8fafc;
+  color: #4a5568;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabela-registos td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #4a5568;
+  font-size: 0.875rem;
+}
+
+.tabela-registos tr:last-child td {
+  border-bottom: none;
+}
+
+.acoes-registo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Lista de anexos */
+.lista-anexos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-anexo {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.item-anexo:last-child {
+  border-bottom: none;
+}
+
+.link-anexo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.link-anexo:hover {
+  text-decoration: underline;
+}
+
+.anexo-descricao {
+  font-size: 0.75rem;
+  color: #718096;
+  margin-left: 1.5rem;
+}
+
+/* Histórico de versões */
+.timeline-historico {
+  position: relative;
+}
+
+.timeline-historico::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background-color: #e2e8f0;
+}
+
+.historico-item {
+  display: flex;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.historico-item:last-child {
+  margin-bottom: 0;
+}
+
+.historico-versao {
+  flex-shrink: 0;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.historico-versao .versao-badge {
+  background-color: white;
+  border: 2px solid #e2e8f0;
+  font-size: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.historico-item:first-child .historico-versao .versao-badge {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.historico-conteudo {
+  flex: 1;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-left: 0.5rem;
+}
+
+.historico-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.historico-cabecalho .historico-data,
+.historico-cabecalho .historico-autor {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.historico-alteracoes {
+  color: #4a5568;
+  font-size: 0.875rem;
+}
+
+.versao-ativa {
+  margin-top: 0.75rem;
+}
+
+.versao-acoes {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #3498db;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .procedimento-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .procedimento-header-acoes {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .procedimento-meta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .secao-sumario, 
+  .secao-procedimento,
+  .secao-responsabilidades,
+  .secao-registos,
+  .secao-historico {
+    grid-template-columns: 1fr;
+  }
+  
+  .historico-cabecalho {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .versao-acoes {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
