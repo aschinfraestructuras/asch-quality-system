@@ -8,8 +8,9 @@ import ViewEnsaio from './pages/ViewEnsaio';
 import NewEnsaio from './pages/NewEnsaio';
 import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import Login from './pages/Login';
+import UploadDocumento from './pages/UploadDocumento'; // 👈 AQUI adicionas a nova página
 
-import RequireAuth from './utils/RequireAuth'; // 👈 Importar o wrapper
+import RequireAuth from './utils/RequireAuth';
 
 const AppRoutes = () => {
   return (
@@ -87,6 +88,16 @@ const AppRoutes = () => {
         element={
           <RequireAuth>
             <Relatorios />
+          </RequireAuth>
+        }
+      />
+
+      {/* ✅ NOVA ROTA PARA ENVIO DE DOCUMENTOS */}
+      <Route
+        path="/documentos/upload"
+        element={
+          <RequireAuth>
+            <UploadDocumento />
           </RequireAuth>
         }
       />

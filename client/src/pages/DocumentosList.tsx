@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { supabase } from '../services/supabaseClient';
 import '../styles/Documentos.css';
+import { DownloadButton } from '../components/common/DownloadButton';
 
 // Tipos
 interface Documento {
@@ -430,10 +431,34 @@ const DocumentosList: React.FC = () => {
                     <Link to={`/documentos/${documento.id}/editar`} className="botao-mini">
                       <FontAwesomeIcon icon="pencil-alt" />
                     </Link>
-                    <button className="botao-mini">
-                      <FontAwesomeIcon icon="download" />
-                    </button>
-                  </div>
+  {documento.ficheiro_url ? (
+    <button
+      className="botao-mini"
+      onClick={async () => {
+        try {
+          const { data, error } = await supabase.storage
+            .from('documentos')
+            .download(documento.ficheiro_url || '');
+
+          if (error || !data) throw error;
+
+          const url = window.URL.createObjectURL(data);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = documento.titulo || 'ficheiro.pdf';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } catch (err) {
+          console.error('Erro ao descarregar ficheiro:', err);
+          alert('Erro ao descarregar ficheiro.');
+        }
+      }}
+    >
+      <FontAwesomeIcon icon="download" />
+    </button>
+  ) : null}
+</div>
                 </div>
               ))}
             </div>
