@@ -1,30 +1,16 @@
-# .github/workflows/firebase-hosting-merge.yml
-
-name: Deploy to Firebase Hosting on merge
-
-on:
-  push:
-    branches:
-      - main
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositório
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Instalar Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Instalar dependências (client)
+      # 👉 Ir para o diretório do frontend (client)
+      - name: Instalar dependências
         working-directory: ./client
-        run: npm ci
+        run: npm install
 
-      - name: Construir aplicação (client)
+      - name: Construir projeto
         working-directory: ./client
         run: npm run build
 
@@ -35,4 +21,3 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CONTROLOBRA_3DCCE }}
           channelId: live
           projectId: controlobra-3dcce
-          entryPoint: client
