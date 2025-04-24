@@ -12,6 +12,10 @@ import UploadDocumento from './pages/UploadDocumento';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectForm from './pages/ProjectForm';
 import ProjectDetails from './pages/ProjectDetails';
+import DocumentosList from './pages/DocumentosList';
+import MateriaisList from './pages/MateriaisList';
+
+
 
 import RequireAuth from './utils/RequireAuth';
 
