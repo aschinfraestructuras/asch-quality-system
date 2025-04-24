@@ -8,7 +8,10 @@ import ViewEnsaio from './pages/ViewEnsaio';
 import NewEnsaio from './pages/NewEnsaio';
 import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import Login from './pages/Login';
-import UploadDocumento from './pages/UploadDocumento'; // 👈 AQUI adicionas a nova página
+import UploadDocumento from './pages/UploadDocumento';
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectForm from './pages/ProjectForm';
+import ProjectDetails from './pages/ProjectDetails';
 
 import RequireAuth from './utils/RequireAuth';
 
@@ -43,6 +46,41 @@ const AppRoutes = () => {
           </RequireAuth>
         }
       />
+      
+      {/* Rotas para Projetos */}
+      <Route
+        path="/projetos"
+        element={
+          <RequireAuth>
+            <ProjectsPage />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/projetos/novo"
+        element={
+          <RequireAuth>
+            <ProjectForm />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/projetos/editar/:id"
+        element={
+          <RequireAuth>
+            <ProjectForm />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/projetos/:id"
+        element={
+          <RequireAuth>
+            <ProjectDetails />
+          </RequireAuth>
+        }
+      />
+      
       <Route
         path="/checklists/*"
         element={
@@ -92,7 +130,7 @@ const AppRoutes = () => {
         }
       />
 
-      {/* ✅ NOVA ROTA PARA ENVIO DE DOCUMENTOS */}
+      {/* Rota para envio de documentos */}
       <Route
         path="/documentos/upload"
         element={

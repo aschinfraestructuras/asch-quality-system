@@ -13,6 +13,11 @@ import DashboardLayout from './pages/DashboardLayout';
 import Checklists from './pages/Checklists';
 import Relatorios from './pages/Relatorios';
 
+// Páginas de Projetos
+import ProjectsPage from './pages/ProjectsPage';
+import ProjectForm from './pages/ProjectForm';
+import ProjectDetails from './pages/ProjectDetails';
+
 // Rotas modulares
 import EnsaioRoutes from './components/EnsaioRoutes';
 import NaoConformidadesRoutes from './components/NaoConformidadesRoutes';
@@ -22,6 +27,7 @@ import FornecedorRoutes from './components/FornecedorRoutes';
 
 // Componentes globais
 import Navbar from './components/Navbar';
+import ApiModeStatus from './components/common/ApiModeStatus';
 
 // Estilos
 import './styles/App.css';
@@ -83,6 +89,12 @@ const App: React.FC = () => {
                 <Route path="analytics" element={<AnalyticsDashboard />} />
               </Route>
 
+              {/* Rotas para Projetos */}
+              <Route path="/projetos" element={<ProjectsPage />} />
+              <Route path="/projetos/novo" element={<ProjectForm />} />
+              <Route path="/projetos/editar/:id" element={<ProjectForm />} />
+              <Route path="/projetos/:id" element={<ProjectDetails />} />
+
               <Route path="/checklists/*" element={<Checklists />} />
               <Route path="/ensaios/*" element={<EnsaioRoutes />} />
               <Route path="/nao-conformidades/*" element={<NaoConformidadesRoutes />} />
@@ -101,6 +113,8 @@ const App: React.FC = () => {
             <p>© 2025 ASCH – Sistema de Gestão da Qualidade</p>
           </footer>
 
+          {/* Indicador do modo de API (apenas em desenvolvimento) */}
+          <ApiModeStatus />
         </div>
       </BrowserRouter>
     </AppProvider>

@@ -1,16 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { getProjects, deleteProject, Project } from '../services/projectsService';
-import { ChangeEvent } from 'react';
-
-// Estenda a interface Project para incluir o campo utilizadores
-interface ProjectWithUser extends Project {
-  utilizadores?: {
-    nome: string;
-  };
-}
+import '../styles/projects.css';
 
 const ProjectsPage = () => {
-  const [projects, setProjects] = useState<ProjectWithUser[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState({
@@ -59,6 +52,10 @@ const ProjectsPage = () => {
     setFilters(prev => ({ ...prev, [name]: value }));
   };
 
+  const navigateTo = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <div className="projects-page">
       <h1>Gestão de Projetos</h1>
@@ -81,7 +78,7 @@ const ProjectsPage = () => {
         
         <button 
           className="btn-primary"
-          onClick={() => window.location.href = '/projetos/novo'}
+          onClick={() => navigateTo('/projetos/novo')}
         >
           Novo Projeto
         </button>
@@ -96,7 +93,7 @@ const ProjectsPage = () => {
           {projects.length === 0 ? (
             <div className="empty-state">
               Nenhum projeto encontrado. 
-              <button onClick={() => window.location.href = '/projetos/novo'}>Criar um projeto</button>
+              <button onClick={() => navigateTo('/projetos/novo')}>Criar um projeto</button>
             </div>
           ) : (
             <table className="data-table">
@@ -136,14 +133,14 @@ const ProjectsPage = () => {
                     <td className="actions">
                       <button 
                         className="btn-icon"
-                        onClick={() => window.location.href = `/projetos/${project.id || ''}`}
+                        onClick={() => project.id && navigateTo(`/projetos/${project.id}`)}
                         title="Ver detalhes"
                       >
                         👁️
                       </button>
                       <button 
                         className="btn-icon"
-                        onClick={() => window.location.href = `/projetos/editar/${project.id || ''}`}
+                        onClick={() => project.id && navigateTo(`/projetos/editar/${project.id}`)}
                         title="Editar"
                       >
                         ✏️
