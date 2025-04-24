@@ -12,6 +12,7 @@ import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import DashboardLayout from './pages/DashboardLayout';
 import Checklists from './pages/Checklists';
 import Relatorios from './pages/Relatorios';
+import DocumentosList from './pages/DocumentosList';
 
 // Páginas de Projetos
 import ProjectsPage from './pages/ProjectsPage';
