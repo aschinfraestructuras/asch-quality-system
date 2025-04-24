@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { supabase } from '../services/supabaseClient';
 import "../styles/DashboardPro.css";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { getDashboardCounts, getTarefasPendentes } from '../services/dashboardService';
+import ProjetosChart from '../components/dashboard/charts/ProjetosChart';
+import DocumentosChart from '../components/dashboard/charts/DocumentosChart';
 
 
 
@@ -385,6 +388,24 @@ const DashboardPro: React.FC = () => {
   const [tipoGraficoProgresso, setTipoGraficoProgresso] = useState<string>('linha');
   const [tipoGraficoNC, setTipoGraficoNC] = useState<string>('barra');
 
+// Novos estados do primeiro ficheiro
+const [counts, setCounts] = useState({
+  projetos: 0,
+  documentos: 0,
+  ensaios: 0,
+  naoConformidades: 0,
+  checklists: 0,
+  materiais: 0
+});
+
+interface Tarefa {
+  id: number;
+  descricao: string;
+  // Add other properties as needed
+}
+
+const [tarefas, setTarefas] = useState<Tarefa[]>([]);
+
   // Efeito para carregar obras
   useEffect(() => {
     const carregarObras = async () => {
@@ -455,6 +476,23 @@ const DashboardPro: React.FC = () => {
           localStorage.removeItem('obraAtiva');
         }
         
+        try {
+          // Adicionar estas linhas
+          const countsData = await getDashboardCounts();
+          const tarefasData = await getTarefasPendentes();
+          
+          setCounts(countsData);
+          setTarefas(tarefasData);
+        
+          // Resto do código existente...
+        } catch (error) {
+          console.error("Erro ao carregar dados do dashboard:", error);
+          setErroCarregamento("Erro ao carregar dados. Usando dados de demonstração.");
+        } finally {
+          setCarregando(false);
+        }
+
+
         // Carregar dados (tenta Supabase primeiro, se falhar usa fallback)
         if (!modoOffline) {
           try {
@@ -1464,6 +1502,21 @@ const DashboardPro: React.FC = () => {
                   <h2><i className="fas fa-certificate"></i> Certificações Pendentes</h2>
                 </div>
                 
+                <div className="analytics-content">
+  <div className="charts-grid">
+    <div className="chart-card">
+      <h3>Distribuição de Projetos</h3>
+      <ProjetosChart />
+    </div>
+    <div className="chart-card">
+      <h3>Documentos por Tipo</h3>
+      <DocumentosChart />
+    </div>
+  </div>
+</div>
+
+
+
                 <div className="card-conteudo">
                   <div className="lista-certificacoes">
                     <div className="certificacao-item">

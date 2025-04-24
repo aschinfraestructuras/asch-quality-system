@@ -8,7 +8,7 @@ import usersRoutes from './routes/users.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 5000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 5001; // Mudar para 5001 ou outra porta disponível
 
 // ✅ CORS BEM CONFIGURADO
 app.use(cors({

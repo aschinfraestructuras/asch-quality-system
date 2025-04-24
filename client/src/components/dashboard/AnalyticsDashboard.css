@@ -1,0 +1,57 @@
+.asch-analytics-container {
+    max-height: 800px;
+    overflow-y: auto;
+    padding: 16px;
+  }
+  
+  .asch-analytics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .asch-analytics-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .asch-analytics-card-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .asch-analytics-card-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4a6fdc;
+  }
+  
+  .asch-analytics-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 16px;
+  }
+  
+  .asch-chart-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .asch-chart-title {
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: #444;
+  }
+  
+  .asch-chart-wrapper {
+    height: 300px;
+    width: 100%;
+    position: relative;
+  }
