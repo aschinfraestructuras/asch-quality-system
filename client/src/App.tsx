@@ -1,3 +1,4 @@
+// app.tsx corrigido sem apagar nada que escreveste
 console.log("🚀 Deploy automático funcionando!");
 
 import React from 'react';
@@ -46,7 +47,8 @@ import {
   faHome, faExclamationCircle, faBoxes, faArrowUp, faArrowDown, faMinus,
   faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate, faIdCard,
   faStar, faStarHalf, faEllipsisV, faPencilAlt, faFileContract,
-  faInfoCircle, faShoppingCart, faStickyNote, faFilePdf, faEnvelope, faPhone
+  faInfoCircle, faShoppingCart, faStickyNote, faFilePdf, faEnvelope, faPhone,
+  faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCalendarAlt as farCalendarAlt,
@@ -63,7 +65,7 @@ library.add(
   faMinus, faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate,
   faIdCard, faStar, farStar, faStarHalf, faEllipsisV, faPencilAlt,
   faFileContract, faInfoCircle, faShoppingCart, faStickyNote,
-  faFilePdf, faEnvelope, faPhone
+  faFilePdf, faEnvelope, faPhone, faQuestionCircle
 );
 
 const App: React.FC = () => {
@@ -72,7 +74,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <div className="app-container">
 
-          {/* 🔝 Barra de navegação fixa */}
+          {/* 🖝 Barra de navegação fixa */}
           <header className="header-fixed">
             <Navbar />
             <div className="header-tools">
@@ -80,7 +82,7 @@ const App: React.FC = () => {
             </div>
           </header>
 
-          {/* 🧭 Conteúdo principal */}
+          {/* 🧑‍🌏 Conteúdo principal */}
           <main className="content-container">
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
