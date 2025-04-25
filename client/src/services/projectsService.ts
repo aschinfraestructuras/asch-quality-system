@@ -1,7 +1,7 @@
 // src/services/projectsService.ts
+import appConfig from '../config/appConfig';
 import { supabase } from './supabaseClient';
 import { PostgrestError } from '@supabase/supabase-js';
-import appConfig from '../config/appConfig';
 
 export interface Project {
   id?: string;
@@ -20,7 +20,6 @@ export interface Project {
   };
 }
 
-// Dados simulados
 const mockProjects: Project[] = [
   {
     id: '1',
@@ -34,9 +33,7 @@ const mockProjects: Project[] = [
     progresso: 75,
     created_at: '2023-01-10T00:00:00Z',
     updated_at: '2024-04-15T00:00:00Z',
-    utilizadores: {
-      nome: 'António Silva'
-    }
+    utilizadores: { nome: 'António Silva' }
   },
   {
     id: '2',
@@ -50,9 +47,7 @@ const mockProjects: Project[] = [
     progresso: 45,
     created_at: '2023-05-01T00:00:00Z',
     updated_at: '2024-04-10T00:00:00Z',
-    utilizadores: {
-      nome: 'Maria Santos'
-    }
+    utilizadores: { nome: 'Maria Santos' }
   },
   {
     id: '3',
@@ -66,9 +61,7 @@ const mockProjects: Project[] = [
     progresso: 100,
     created_at: '2022-09-25T00:00:00Z',
     updated_at: '2023-08-20T00:00:00Z',
-    utilizadores: {
-      nome: 'Carlos Pereira'
-    }
+    utilizadores: { nome: 'Carlos Pereira' }
   },
   {
     id: '4',
@@ -82,257 +75,122 @@ const mockProjects: Project[] = [
     progresso: 15,
     created_at: '2023-01-20T00:00:00Z',
     updated_at: '2023-05-15T00:00:00Z',
-    utilizadores: {
-      nome: 'António Silva'
-    }
+    utilizadores: { nome: 'António Silva' }
   }
 ];
 
-// Simula um pequeno atraso para parecer uma API real
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-// Funções usando Supabase (dados reais)
 const supabaseGetProjects = async (filters = {}) => {
   try {
     let query = supabase.from('projetos').select('*, utilizadores(nome)');
-    
-    // Aplicar filtros
     Object.entries(filters).forEach(([key, value]) => {
-      if (value) {
-        query = query.eq(key, value);
-      }
+      if (value) query = query.eq(key, value);
     });
-    
     const { data, error } = await query.order('created_at', { ascending: false });
-    
     if (error) throw error;
     return { data, error: null };
   } catch (error) {
-    console.error('Erro ao buscar projetos do Supabase:', error);
-    return { data: null, error: error as PostgrestError };
+    console.error('Erro Supabase (getProjects):', error);
+    return { data: null, error };
   }
 };
 
-const supabaseGetProjectById = async (id: string) => {
-  try {
-    const { data, error } = await supabase
-      .from('projetos')
-      .select('*, utilizadores(nome)')
-      .eq('id', id)
-      .single();
-    
-    if (error) throw error;
-    return { data, error: null };
-  } catch (error) {
-    console.error(`Erro ao buscar projeto com ID ${id} do Supabase:`, error);
-    return { data: null, error: error as PostgrestError };
-  }
-};
-
-const supabaseCreateProject = async (project: Project) => {
-  try {
-    const { data, error } = await supabase
-      .from('projetos')
-      .insert([project])
-      .select();
-    
-    if (error) throw error;
-    return { data: data?.[0] || null, error: null };
-  } catch (error) {
-    console.error('Erro ao criar projeto no Supabase:', error);
-    return { data: null, error: error as PostgrestError };
-  }
-};
-
-const supabaseUpdateProject = async (id: string, updates: Partial<Project>) => {
-  try {
-    const { data, error } = await supabase
-      .from('projetos')
-      .update(updates)
-      .eq('id', id)
-      .select();
-    
-    if (error) throw error;
-    return { data: data?.[0] || null, error: null };
-  } catch (error) {
-    console.error(`Erro ao atualizar projeto no Supabase:`, error);
-    return { data: null, error: error as PostgrestError };
-  }
-};
-
-const supabaseDeleteProject = async (id: string) => {
-  try {
-    const { error } = await supabase
-      .from('projetos')
-      .delete()
-      .eq('id', id);
-    
-    if (error) throw error;
-    return { success: true, error: null };
-  } catch (error) {
-    console.error(`Erro ao excluir projeto do Supabase:`, error);
-    return { success: false, error: error as PostgrestError };
-  }
-};
-
-const supabaseGetUsers = async () => {
-  try {
-    const { data, error } = await supabase
-      .from('utilizadores')
-      .select('id, nome');
-    
-    if (error) throw error;
-    return { data, error: null };
-  } catch (error) {
-    console.error('Erro ao buscar utilizadores do Supabase:', error);
-    return { data: null, error: error as PostgrestError };
-  }
-};
-
-// Funções usando dados simulados
 const mockGetProjects = async (filters = {}) => {
-  await delay(500);
-  
-  try {
-    if (appConfig.enableDebugLogs) {
-      console.log('Usando dados simulados para projetos');
-    }
-    
-    // Filtra os projetos de acordo com os filtros
-    let filteredProjects = [...mockProjects];
-    
-    if (filters && Object.keys(filters).length > 0) {
-      filteredProjects = filteredProjects.filter(project => {
-        return Object.entries(filters).every(([key, value]) => {
-          return !value || project[key as keyof Project] === value;
-        });
-      });
-    }
-    
-    return { data: filteredProjects, error: null };
-  } catch (error) {
-    console.error('Erro ao buscar projetos simulados:', error);
-    return { data: null, error: error as PostgrestError };
-  }
-};
-
-const mockGetProjectById = async (id: string) => {
   await delay(300);
-  
   try {
-    if (appConfig.enableDebugLogs) {
-      console.log(`Buscando projeto simulado com ID: ${id}`);
+    let result = [...mockProjects];
+    if (Object.keys(filters).length) {
+      result = result.filter(p =>
+        Object.entries(filters).every(([key, value]) => !value || p[key as keyof Project] === value)
+      );
     }
-    
-    const project = mockProjects.find(p => p.id === id);
-    
-    if (!project) {
-      throw new Error('Projeto não encontrado');
-    }
-    
-    return { data: project, error: null };
+    return { data: result, error: null };
   } catch (error) {
-    console.error(`Erro ao buscar projeto simulado:`, error);
-    return { data: null, error: error as PostgrestError };
+    console.error('Erro Mock (getProjects):', error);
+    return { data: null, error };
   }
 };
 
-const mockCreateProject = async (project: Project) => {
-  await delay(700);
-  
+export const getProjects = appConfig.apiMode === 'mock' ? mockGetProjects : supabaseGetProjects;
+
+export const getProjectById = async (id: string) => {
+  const { data, error } = await getProjects({ id });
+  return { data: data?.[0] ?? null, error };
+};
+
+export const createProject = async (projeto: Project) => {
+  if (appConfig.apiMode === 'mock') {
+    await delay(300);
+    const novo = { ...projeto, id: Date.now().toString(), created_at: new Date().toISOString() };
+    mockProjects.push(novo);
+    return { data: novo, error: null };
+  }
   try {
-    if (appConfig.enableDebugLogs) {
-      console.log('Criando projeto simulado:', project);
-    }
-    
-    const newProject = {
-      ...project,
-      id: String(mockProjects.length + 1),
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    };
-    
-    mockProjects.push(newProject);
-    
-    return { data: newProject, error: null };
+    const { data, error } = await supabase.from('projetos').insert([projeto]).select();
+    if (error) throw error;
+    return { data: data?.[0] ?? null, error: null };
   } catch (error) {
-    console.error('Erro ao criar projeto simulado:', error);
-    return { data: null, error: error as PostgrestError };
+    console.error('Erro Supabase (createProject):', error);
+    return { data: null, error };
   }
 };
 
-const mockUpdateProject = async (id: string, updates: Partial<Project>) => {
-  await delay(500);
-  
+export const updateProject = async (id: string, updates: Partial<Project>) => {
+  if (appConfig.apiMode === 'mock') {
+    await delay(300);
+    const idx = mockProjects.findIndex(p => p.id === id);
+    if (idx === -1) return { data: null, error: new Error('Projeto não encontrado') };
+    mockProjects[idx] = { ...mockProjects[idx], ...updates };
+    return { data: mockProjects[idx], error: null };
+  }
   try {
-    if (appConfig.enableDebugLogs) {
-      console.log(`Atualizando projeto simulado com ID ${id}:`, updates);
-    }
-    
-    const index = mockProjects.findIndex(p => p.id === id);
-    
-    if (index === -1) {
-      throw new Error('Projeto não encontrado');
-    }
-    
-    const updatedProject = {
-      ...mockProjects[index],
-      ...updates,
-      updated_at: new Date().toISOString()
-    };
-    
-    mockProjects[index] = updatedProject;
-    
-    return { data: updatedProject, error: null };
+    const { data, error } = await supabase.from('projetos').update(updates).eq('id', id).select();
+    if (error) throw error;
+    return { data: data?.[0] ?? null, error: null };
   } catch (error) {
-    console.error(`Erro ao atualizar projeto simulado:`, error);
-    return { data: null, error: error as PostgrestError };
+    console.error('Erro Supabase (updateProject):', error);
+    return { data: null, error };
   }
 };
 
-const mockDeleteProject = async (id: string) => {
-  await delay(400);
-  
+export const deleteProject = async (id: string) => {
+  if (appConfig.apiMode === 'mock') {
+    await delay(200);
+    const idx = mockProjects.findIndex(p => p.id === id);
+    if (idx === -1) return { success: false, error: new Error('Projeto não encontrado') };
+    mockProjects.splice(idx, 1);
+    return { success: true, error: null };
+  }
   try {
-    if (appConfig.enableDebugLogs) {
-      console.log(`Excluindo projeto simulado com ID ${id}`);
-    }
-    
-    const index = mockProjects.findIndex(p => p.id === id);
-    
-    if (index === -1) {
-      throw new Error('Projeto não encontrado');
-    }
-    
-    mockProjects.splice(index, 1);
-    
+    const { error } = await supabase.from('projetos').delete().eq('id', id);
+    if (error) throw error;
     return { success: true, error: null };
   } catch (error) {
-    console.error(`Erro ao excluir projeto simulado:`, error);
-    return { success: false, error: error as PostgrestError };
+    console.error('Erro Supabase (deleteProject):', error);
+    return { success: false, error };
   }
 };
 
-const mockGetUsers = async () => {
-  await delay(300);
-  
-  const mockUsers = [
-    { id: '1', nome: 'António Silva' },
-    { id: '2', nome: 'Maria Santos' },
-    { id: '3', nome: 'Carlos Pereira' },
-    { id: '4', nome: 'Ana Costa' }
-  ];
-  
-  return { data: mockUsers, error: null };
+export const getUsers = async () => {
+  if (appConfig.apiMode === 'mock') {
+    await delay(200);
+    return {
+      data: [
+        { id: '1', nome: 'António Silva' },
+        { id: '2', nome: 'Maria Santos' },
+        { id: '3', nome: 'Carlos Pereira' },
+        { id: '4', nome: 'Ana Costa' }
+      ],
+      error: null
+    };
+  }
+  try {
+    const { data, error } = await supabase.from('utilizadores').select('id, nome');
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error) {
+    console.error('Erro Supabase (getUsers):', error);
+    return { data: null, error };
+  }
 };
-
-// Exporta as funções corretas baseadas na configuração
-export const getProjects = appConfig.apiMode === 'mock' ? mockGetProjects : supabaseGetProjects;
-export const getProjectById = appConfig.apiMode === 'mock' ? mockGetProjectById : supabaseGetProjectById;
-export const createProject = appConfig.apiMode === 'mock' ? mockCreateProject : supabaseCreateProject;
-export const updateProject = appConfig.apiMode === 'mock' ? mockUpdateProject : supabaseUpdateProject;
-export const deleteProject = appConfig.apiMode === 'mock' ? mockDeleteProject : supabaseDeleteProject;
-export const getUsers = appConfig.apiMode === 'mock' ? mockGetUsers : supabaseGetUsers;
-
-// Exportando para debug
-export const currentMode = appConfig.apiMode;

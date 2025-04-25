@@ -375,6 +375,15 @@ class SistemaQualidadeService {
     }
   }
 
+  // 🔁 Ações específicas para projetos (wrapper da ação genérica)
+  async executarAcaoProjeto(
+    idProjeto: string,
+    acao: 'aprovar' | 'concluir' | 'rejeitar',
+    dadosAdicionais: any = {}
+  ) {
+    return this.executarAcao('projetos', idProjeto, acao, dadosAdicionais, ['editar']);
+  }
+
   // Notificação de Ações
   private async notificarAcao(tabela: string, id: string, acao: string) {
     try {
