@@ -194,3 +194,5 @@ export const getUsers = async () => {
     return { data: null, error };
   }
 };
+
+export const currentMode = appConfig.apiMode;

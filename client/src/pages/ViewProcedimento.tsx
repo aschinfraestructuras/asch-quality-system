@@ -6,7 +6,7 @@ import {
   faExternalLinkAlt, faClipboardCheck, faCheckCircle, faTimesCircle,
   faExclamationTriangle, faCalendarAlt, faUserAlt, faBuilding,
   faFileAlt, faPaperclip, faInfoCircle, faSpinner, faCog, 
-  faListOl, faBook, faChartBar, faTable, faEye
+  faListOl, faBook, faTable, faEye
 } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Documentos.css';
 

@@ -416,7 +416,7 @@ const MateriaisList: React.FC = () => {
                           </td>
                           <td>{material.categoria}</td>
                           <td>{material.unidade}</td>
-                          <td>{material.preco_unitario.toFixed(2)} €</td>
+                          <td>{material.preco_unitario ? material.preco_unitario.toFixed(2) + ' €' : '—'}</td>
                           <td>
                             <span className="stock-badge stock-ok">
                               Disponível
