@@ -6,6 +6,7 @@ import { AppProvider } from './contexts/AppContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import './i18n'; // Configuração i18n
 import { LanguageSelector } from './components/common/LanguageSelector';
+import styled from 'styled-components';
 
 // Páginas principais
 import DashboardPro from './pages/DashboardPro';
@@ -14,6 +15,8 @@ import DashboardLayout from './pages/DashboardLayout';
 import Checklists from './pages/Checklists';
 import Relatorios from './pages/Relatorios';
 import DocumentosList from './pages/DocumentosList';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 
 // Páginas de Projetos
 import ProjectsPage from './pages/ProjectsPage';
@@ -38,43 +41,51 @@ import './styles/components.css';
 
 // FontAwesome config
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  faBuilding, faFile, faFlask, faExclamationTriangle, faClipboardCheck,
-  faBox, faSync, faCalendarAlt, faUser, faFilter, faHistory, faClock,
-  faEye, faPlus, faTasks, faCheckCircle, faChartBar, faChartLine,
-  faChartPie, faChartArea, faTable, faSort, faSortUp, faSortDown,
-  faFileExport, faSearch, faBell, faCog, faList, faCheck, faTachometerAlt,
-  faHome, faExclamationCircle, faBoxes, faArrowUp, faArrowDown, faMinus,
-  faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate, faIdCard,
-  faStar, faStarHalf, faEllipsisV, faPencilAlt, faFileContract,
-  faInfoCircle, faShoppingCart, faStickyNote, faFilePdf, faEnvelope, faPhone,
-  faQuestionCircle
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faCalendarAlt as farCalendarAlt,
-  faStar as farStar
-} from '@fortawesome/free-regular-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
-library.add(
-  faBuilding, faFile, faFlask, faExclamationTriangle, faClipboardCheck,
-  faBox, faSync, faCalendarAlt, farCalendarAlt, faUser, faFilter, faHistory,
-  faClock, faEye, faPlus, faTasks, faCheckCircle, faChartBar, faChartLine,
-  faChartPie, faChartArea, faTable, faSort, faSortUp, faSortDown,
-  faFileExport, faSearch, faBell, faCog, faList, faCheck, faTachometerAlt,
-  faHome, faExclamationCircle, faBoxes, faArrowUp, faArrowDown,
-  faMinus, faTimes, faCubes, faWarehouse, faCalendarDay, faCertificate,
-  faIdCard, faStar, farStar, faStarHalf, faEllipsisV, faPencilAlt,
-  faFileContract, faInfoCircle, faShoppingCart, faStickyNote,
-  faFilePdf, faEnvelope, faPhone, faQuestionCircle
-);
+library.add(fas, far, fab);
+
+const AppContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+  margin-top: 4rem;
+  padding: 2rem;
+`;
+
+const Footer = styled.footer`
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  text-align: center;
+  color: white;
+`;
 
 const App: React.FC = () => {
   return (
     <AppProvider>
       <BrowserRouter>
         <div className="app-container">
-
-          {/* 🖝 Barra de navegação fixa */}
           <header className="header-fixed">
             <Navbar />
             <div className="header-tools">
@@ -82,12 +93,14 @@ const App: React.FC = () => {
             </div>
           </header>
 
-          {/* 🧑‍🌏 Conteúdo principal */}
           <main className="content-container">
             <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
+              {/* Rotas públicas */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
 
-              <Route path="/dashboard/*" element={<DashboardLayout />}>
+              {/* Rotas protegidas */}
+              <Route path="/dashboard" element={<DashboardLayout />}>
                 <Route index element={<DashboardPro />} />
                 <Route path="analytics" element={<AnalyticsDashboard />} />
               </Route>
@@ -111,14 +124,11 @@ const App: React.FC = () => {
             </Routes>
           </main>
 
-          {/* 📌 Rodapé */}
           <footer className="app-footer">
             <p>© 2025 ASCH – Sistema de Gestão da Qualidade</p>
           </footer>
-
-          {/* Indicador do modo de API (apenas em desenvolvimento) */}
-          <ApiModeStatus />
         </div>
+        <ApiModeStatus />
       </BrowserRouter>
     </AppProvider>
   );

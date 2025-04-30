@@ -14,8 +14,8 @@ import ProjectForm from './pages/ProjectForm';
 import ProjectDetails from './pages/ProjectDetails';
 import DocumentosList from './pages/DocumentosList';
 import MateriaisList from './pages/MateriaisList';
-
-
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
 
 import RequireAuth from './utils/RequireAuth';
 
@@ -23,7 +23,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Rotas públicas */}
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
 
       {/* Rotas protegidas */}
       <Route
